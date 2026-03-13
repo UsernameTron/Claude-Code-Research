@@ -1,0 +1,13 @@
+# Private operator context (never commit)
+context/
+state/
+
+# Local settings
+.claude/settings.local.json
+
+# Plans and outputs (session-specific)
+plans/
+outputs/
+
+# macOS
+.DS_Store
