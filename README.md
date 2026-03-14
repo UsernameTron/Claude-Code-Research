@@ -74,6 +74,7 @@ Background knowledge loaded automatically by generators and the concierge. Not u
 | **cc-ref-permissions** | Permission rule syntax, tool patterns, modes |
 | **cc-ref-plugins** | Plugin manifest schema, directory structure, namespacing |
 | **cc-ref-subagents** | Agent frontmatter, built-in agents, tool control, teams |
+| **cc-ref-multi-agent** | Multi-agent orchestration patterns, token economics, and the three-part gate |
 
 ### Specialist Subagents
 
@@ -126,7 +127,7 @@ Layer 2: Generator Skills + Specialist Subagents
 claude-code-factory/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
-├── skills/                      # 18 skills (auto-discovered)
+├── skills/                      # 19 skills (auto-discovered)
 │   ├── extension-guide/         # Layer 0: invisible router
 │   ├── extension-concierge/     # Layer 1: orchestrator
 │   ├── cc-factory/              # Direct-access generator
@@ -139,7 +140,8 @@ claude-code-factory/
 │   ├── output-style-creator/
 │   ├── extension-auditor/       # Validators (2)
 │   ├── upgrade-scanner/
-│   ├── cc-ref-hooks/            # Reference skills (6)
+│   ├── cc-ref-multi-agent/      # Reference skills (7)
+│   ├── cc-ref-hooks/
 │   ├── cc-ref-settings/
 │   ├── cc-ref-skills/
 │   ├── cc-ref-permissions/

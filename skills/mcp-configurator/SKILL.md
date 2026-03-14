@@ -9,6 +9,8 @@ description: |
   database/API connections. Triggers on: "connect to", "add MCP", "set up MCP",
   "integrate with", "MCP server", "connect database", "add GitHub/Slack/Notion".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-settings
 ---
 
 # MCP Configurator — Claude Code MCP Server Generator
@@ -164,7 +166,31 @@ Provide:
 
 ---
 
-## 7. Validation Checklist
+## 7. Subagent MCP Scoping
+
+MCP servers can be scoped to individual subagents via their frontmatter `mcpServers` field.
+This allows an agent to declare which MCP servers it needs without affecting other agents
+or the main session.
+
+Example subagent frontmatter with scoped MCP:
+```yaml
+---
+name: data-analyst
+description: Queries databases and builds reports.
+tools: Read, Bash, Grep
+mcpServers:
+  postgres:
+    command: npx
+    args: ["-y", "@bytebase/dbhub", "--dsn", "${DATABASE_URL}"]
+---
+```
+
+When generating MCP configs for use with subagents, offer the frontmatter approach
+as an alternative to project-wide `.mcp.json` if the server is only needed by one agent.
+
+---
+
+## 8. Validation Checklist
 
 - [ ] Transport is appropriate for the service type
 - [ ] Server name is short, descriptive, kebab-case

@@ -9,6 +9,9 @@ description: |
   Triggers on: "create a skill", "write a hook", "build a plugin", "set up MCP",
   "configure settings", "make a subagent", "CI/CD pipeline", "output style",
   "package into plugin", "I need a hook that", "generate a config for".
+user-invocable: true
+argument-hint: "<describe the Claude Code extension you want to create>"
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 ---
 
 # Extension Concierge — Orchestrator (Layer 1)

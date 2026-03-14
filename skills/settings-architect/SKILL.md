@@ -9,6 +9,8 @@ description: |
   "configure settings", "set permissions", "lock model", "enable sandbox",
   "allow/deny tool", "restrict access", "settings.json".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-settings
 ---
 
 # Settings Architect — Claude Code Settings Generator
@@ -108,6 +110,8 @@ config for the appropriate scope.
 | Thinking | `alwaysThinkingEnabled` | `true` |
 | MCP | `enableAllProjectMcpServers` | `true` |
 | Plugins | `enabledPlugins` | `{"plugin@marketplace": true}` |
+| Marketplaces | `extraKnownMarketplaces` | `{"org-tools": {"source": "github", "repo": "org/claude-plugins"}}` |
+| Memory | `autoMemoryEnabled` | `true` (enable automatic CLAUDE.md memory updates) |
 | Hooks | `hooks` | See hook-factory for hook config |
 | Environment | `env` | `{"NODE_ENV": "development"}` |
 

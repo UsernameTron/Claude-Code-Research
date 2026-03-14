@@ -9,6 +9,7 @@ description: |
   "CI/CD pipeline", "automate PRs", "code review action", "GitLab CI",
   "set up CI/CD with Claude", "deploy with Claude".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
 ---
 
 # CI/CD Generator — Claude Code Pipeline Generator
