@@ -1,0 +1,130 @@
+---
+name: cc-ref-plugins
+description: |
+  Claude Code plugins reference — plugin.json manifest schema, plugin
+  directory structure, component types (skills, agents, hooks, MCP servers,
+  LSP servers), namespacing, ${CLAUDE_PLUGIN_ROOT}, installation scopes,
+  marketplace distribution, plugin CLI commands, auto-discovery.
+  Background knowledge only — provides authoritative Claude Code documentation
+  for plugins. NOT a user-invoked command.
+user-invocable: false
+---
+
+# Claude Code Reference: Plugins
+
+## Quick Reference
+
+### Plugin Directory Structure
+
+```
+my-plugin/
+├── .claude-plugin/
+│   └── plugin.json          # Manifest (name required, rest optional)
+├── skills/                   # Auto-discovered
+│   └── my-skill/
+│       └── SKILL.md
+├── commands/                 # Auto-discovered (simple .md files)
+│   └── deploy.md
+├── agents/                   # Auto-discovered
+│   └── reviewer.md
+├── hooks/
+│   └── hooks.json           # Or inline in plugin.json
+├── .mcp.json                # Or inline in plugin.json
+├── .lsp.json                # Or inline in plugin.json
+└── output-styles/            # Auto-discovered
+    └── concise.md
+```
+
+### plugin.json Required Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Unique identifier (kebab-case). Used as namespace prefix for all components |
+
+### plugin.json Metadata Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `version` | string | Semver (e.g., `"1.2.0"`) |
+| `description` | string | Brief explanation |
+| `author` | object | `{name, email, url}` |
+| `homepage` | string | Documentation URL |
+| `repository` | string | Source code URL |
+| `license` | string | License identifier (e.g., `"MIT"`) |
+| `keywords` | array | Discovery tags |
+
+### Component Path Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `commands` | string\|array | Additional command files/dirs |
+| `agents` | string\|array | Additional agent files |
+| `skills` | string\|array | Additional skill dirs |
+| `hooks` | string\|array\|object | Hook config paths or inline |
+| `mcpServers` | string\|array\|object | MCP config paths or inline |
+| `outputStyles` | string\|array | Output style files/dirs |
+| `lspServers` | string\|array\|object | LSP server configs |
+
+Custom paths **supplement** default directories — they don't replace them.
+All paths must be relative to plugin root and start with `./`.
+
+### Namespacing
+
+All plugin components are namespaced: `/{plugin-name}:{skill-name}`
+- Prevents conflicts between plugins
+- Plugin name from `plugin.json` `name` field
+- Example: plugin `my-tools` with skill `deploy` → `/my-tools:deploy`
+
+### Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `${CLAUDE_PLUGIN_ROOT}` | Absolute path to plugin directory. Use in hooks, MCP servers, scripts |
+
+### Installation Scopes
+
+| Scope | Settings File | Use Case |
+|-------|---------------|----------|
+| `user` (default) | `~/.claude/settings.json` | Personal, all projects |
+| `project` | `.claude/settings.json` | Team-shared via git |
+| `local` | `.claude/settings.local.json` | Project-specific, gitignored |
+| `managed` | Managed settings | IT-controlled (read-only) |
+
+### Plugin Component Types
+
+| Component | Location | Format |
+|-----------|----------|--------|
+| Skills | `skills/{name}/SKILL.md` | Directory with SKILL.md + optional supporting files |
+| Commands | `commands/{name}.md` | Simple markdown files |
+| Agents | `agents/{name}.md` | Markdown with YAML frontmatter |
+| Hooks | `hooks/hooks.json` | JSON config or inline in plugin.json |
+| MCP Servers | `.mcp.json` | Standard MCP config or inline in plugin.json |
+| LSP Servers | `.lsp.json` | LSP config with command + extensionToLanguage |
+| Output Styles | `output-styles/{name}.md` | Markdown with frontmatter |
+
+### Standalone vs Plugin
+
+| Feature | Standalone (`.claude/`) | Plugin |
+|---------|------------------------|--------|
+| Skill names | `/hello` | `/plugin-name:hello` |
+| Best for | Personal, project-specific | Sharing, distribution |
+| Discovery | Auto from `.claude/` | Auto from plugin dirs |
+
+### CLI Commands
+
+```bash
+claude --plugin-dir ./my-plugin   # Test locally
+/plugin                            # Plugin manager UI
+/help                              # See plugin skills listed
+```
+
+## Authoritative Sources
+
+When you need complete documentation for plugins, read these files:
+
+- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugins.md` — Plugin creation guide (17KB): quickstart, component types, development workflow, testing, conversion from standalone
+- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugins-reference.md` — Complete technical reference (26KB): manifest schema, all component specs, path behavior rules, environment variables, LSP servers
+- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugin-marketplaces.md` — Marketplace distribution (34KB): publishing, versioning, update mechanisms, marketplace configuration
+- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/discover-plugins.md` — Plugin discovery and installation (19KB): install commands, scope flags, browsing, enabling/disabling
+
+Read the actual files. Do not rely on training knowledge for manifest fields, component paths, namespacing rules, or installation behavior. The files above contain the current, verified Anthropic documentation.
