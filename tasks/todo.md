@@ -1,115 +1,66 @@
-# Current Task: Phase 2 — Specialized Generators
-**Branch**: `feat/phase-2-generators`
+# Current Task: Phase 4 — Specialist Subagents
+**Branch**: `feat/phase-4-subagents`
 **Started**: 2026-03-13
 
 ## Plan
 
-### 2.1 — Skill Factory (`skill-factory`)
-- [x] Write `skills-source/skill-factory/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & auto-resolution workflow
-  - [x] Section 2: Frontmatter field resolution (all 11 documented fields)
-  - [x] Section 3: Body structure guidance (progressive disclosure, size limits)
-  - [x] Section 4: Output protocol (file paths, testing steps)
-  - [x] Reference loading: cc-ref-skills
-- [x] Deploy to `~/.claude/skills/skill-factory/SKILL.md`
-- [ ] Test: "create a skill that validates JSON schemas"
+### Prerequisites: Missing Reference Skills (cc-ref-permissions, cc-ref-plugins, cc-ref-subagents)
 
-### 2.2 — Hook Factory (`hook-factory`)
-- [x] Write `skills-source/hook-factory/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & workflow (detect → load → resolve → output)
-  - [x] Section 2: Intent-to-event mapping
-  - [x] Section 3: Handler type selection (command, http, prompt, agent)
-  - [x] Section 4: Auto-resolution engine (event, matcher, handler, blocking, scope)
-  - [x] Section 5: Output protocol (JSON config, script files, merge behavior, test steps)
-  - [x] Reference loading: cc-ref-hooks
-- [x] Deploy to `~/.claude/skills/hook-factory/SKILL.md`
-- [ ] Test: "create a hook that blocks rm -rf commands"
+Phase 4 agents reference 6 reference skills via the `skills` field. Only 3 exist
+(cc-ref-hooks, cc-ref-settings, cc-ref-skills). Build the missing 3 first.
 
-### 2.3 — Plugin Packager (`plugin-packager`)
-- [x] Write `skills-source/plugin-packager/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & packaging workflow
-  - [x] Section 2: Manifest schema resolution (plugin.json fields)
-  - [x] Section 3: Directory structure generation
-  - [x] Section 4: Component migration (existing skills/agents/hooks → plugin)
-  - [x] Reference loading: plugins-reference.md (authoritative source)
-- [x] Deploy to `~/.claude/skills/plugin-packager/SKILL.md`
-- [ ] Test: "package my code-reviewer agent into a plugin"
+#### 0.A — cc-ref-permissions
+- [ ] Write `skills-source/cc-ref-permissions/SKILL.md`
+  - [ ] Quick Reference: permission rule syntax, pattern matching, mode descriptions
+  - [ ] Authoritative Sources: permissions.md, Session_8_Schemas.md
+- [ ] Deploy to `~/.claude/skills/cc-ref-permissions/SKILL.md`
 
-### 2.4 — MCP Configurator (`mcp-configurator`)
-- [x] Write `skills-source/mcp-configurator/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & configuration workflow
-  - [x] Section 2: Transport type resolution (HTTP over SSE)
-  - [x] Section 3: Scope & auth resolution (OAuth, API keys, env vars)
-  - [x] Section 4: Output protocol (.mcp.json or CLI commands)
-  - [x] Reference loading: mcp.md (authoritative source)
-- [x] Deploy to `~/.claude/skills/mcp-configurator/SKILL.md`
-- [ ] Test: "connect to a PostgreSQL database via MCP"
+#### 0.B — cc-ref-plugins
+- [ ] Write `skills-source/cc-ref-plugins/SKILL.md`
+  - [ ] Quick Reference: plugin.json fields, directory structure, component types
+  - [ ] Authoritative Sources: plugins.md, plugins-reference.md, plugin-marketplaces.md, discover-plugins.md
+- [ ] Deploy to `~/.claude/skills/cc-ref-plugins/SKILL.md`
 
-### 2.5 — Settings Architect (`settings-architect`)
-- [x] Write `skills-source/settings-architect/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & settings workflow
-  - [x] Section 2: Scope resolution (user/project/local/managed)
-  - [x] Section 3: Permission rule syntax builder
-  - [x] Section 4: Sandbox, model, env configuration
-  - [x] Reference loading: cc-ref-settings
-- [x] Deploy to `~/.claude/skills/settings-architect/SKILL.md`
-- [ ] Test: "create settings that lock to Sonnet and block curl"
+#### 0.C — cc-ref-subagents
+- [ ] Write `skills-source/cc-ref-subagents/SKILL.md`
+  - [ ] Quick Reference: frontmatter fields, built-in agent types, nesting constraint
+  - [ ] Authoritative Sources: sub-agents.md, agent-teams.md
+- [ ] Deploy to `~/.claude/skills/cc-ref-subagents/SKILL.md`
 
-### 2.6 — CI/CD Pipeline Generator (`cicd-generator`)
-- [x] Write `skills-source/cicd-generator/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & pipeline workflow
-  - [x] Section 2: Platform resolution (GitHub Actions, GitLab)
-  - [x] Section 3: Claude Code action configuration
-  - [x] Section 4: Output protocol (workflow YAML, secrets, test steps)
-  - [x] Reference loading: github-actions.md, gitlab-ci-cd.md, headless.md
-- [x] Deploy to `~/.claude/skills/cicd-generator/SKILL.md`
-- [ ] Test: "create a GitHub Action that reviews PRs with Claude"
+### 4.1 — Hook Engineer (`hook-engineer`)
+- [ ] Write `agents-source/hook-engineer.md`
+  - [ ] Frontmatter: name, description, tools, model, maxTurns, skills
+  - [ ] System prompt: multi-event coordination, complex hook systems
+  - [ ] Skills: cc-ref-hooks, cc-ref-permissions, cc-ref-settings
+- [ ] Deploy to `~/.claude/agents/hook-engineer.md`
+- [ ] Test: "Design a coaching enforcement system using PreToolUse + PostToolUse + Stop"
 
-### 2.7 — Output Style Creator (`output-style-creator`)
-- [x] Write `skills-source/output-style-creator/SKILL.md`
-  - [x] Frontmatter: name, description, allowed-tools
-  - [x] Section 1: Role & style creation workflow
-  - [x] Section 2: Tone/format/audience resolution
-  - [x] Section 3: Output style vs system prompt vs CLAUDE.md distinction
-  - [x] Section 4: Output protocol (style file with frontmatter)
-  - [x] Reference loading: output-styles.md
-- [x] Deploy to `~/.claude/skills/output-style-creator/SKILL.md`
-- [ ] Test: "create an output style for executive briefings"
+### 4.2 — Plugin Builder (`plugin-builder`)
+- [ ] Write `agents-source/plugin-builder.md`
+  - [ ] Frontmatter: name, description, tools, model, permissionMode, maxTurns, skills
+  - [ ] System prompt: complete plugin creation with all components
+  - [ ] Skills: cc-ref-plugins, cc-ref-skills, cc-ref-hooks
+- [ ] Deploy to `~/.claude/agents/plugin-builder.md`
+- [ ] Test: "Create a complete code-quality plugin with linting hooks and a review agent"
+
+### 4.3 — Extension Validator (`extension-validator`)
+- [ ] Write `agents-source/extension-validator.md`
+  - [ ] Frontmatter: name, description, tools, disallowedTools, model, permissionMode, maxTurns, skills
+  - [ ] System prompt: read-only validation, compliance reports
+  - [ ] Skills: cc-ref-hooks, cc-ref-settings, cc-ref-permissions, cc-ref-plugins, cc-ref-skills, cc-ref-subagents
+- [ ] Deploy to `~/.claude/agents/extension-validator.md`
+- [ ] Test: "Validate all skills in ~/.claude/skills/ against official schemas"
 
 ## Verification
-- [x] All 7 skills have valid YAML frontmatter
-- [x] All skills under 500 lines (max: 304, min: 163)
-- [x] Each skill references its authoritative doc source correctly
-- [x] No TODO/FIXME left behind
-- [ ] Each skill tested with at least one generation request
-- [x] Diff reviewed: all 7 source/deploy pairs identical
+- [ ] All 3 reference skills have valid YAML frontmatter
+- [ ] All 3 agents have valid YAML frontmatter
+- [ ] Each agent's `skills` field references only existing skills
+- [ ] Source/deploy pairs are identical (6 files: 3 skills + 3 agents)
+- [ ] Each agent tested with at least one invocation
+- [ ] No TODO/FIXME left behind
 
 ## Results
-
-**Build date**: 2026-03-13
-**All 7 generators written and deployed:**
-
-| Skill | Lines | Reference Source |
-|-------|-------|-----------------|
-| hook-factory | 304 | cc-ref-hooks |
-| skill-factory | 218 | cc-ref-skills |
-| cicd-generator | 212 | github-actions.md, gitlab-ci-cd.md, headless.md |
-| output-style-creator | 225 | output-styles.md |
-| plugin-packager | 179 | plugins-reference.md |
-| mcp-configurator | 176 | mcp.md |
-| settings-architect | 163 | cc-ref-settings |
-
-**All deploy diffs**: identical (7/7)
-**All frontmatter**: valid YAML, correct names
+<!-- Add after completion -->
 
 ## Session Handoff
-
-All 7 Phase 2 generators are written and deployed. Remaining work:
-- Behavioral testing of each skill in a new session
-- Commit to `feat/phase-2-generators` branch
+<!-- Add if task spans multiple sessions -->
