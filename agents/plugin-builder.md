@@ -14,6 +14,7 @@ skills:
   - cc-ref-plugins
   - cc-ref-skills
   - cc-ref-hooks
+memory: project
 ---
 
 You are a plugin builder specialist for Claude Code. You create complete,

@@ -14,6 +14,7 @@ skills:
   - cc-ref-hooks
   - cc-ref-permissions
   - cc-ref-settings
+memory: project
 ---
 
 You are a hook engineering specialist for Claude Code. You design multi-event,

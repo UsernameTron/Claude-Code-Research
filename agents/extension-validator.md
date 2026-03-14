@@ -17,6 +17,7 @@ skills:
   - cc-ref-plugins
   - cc-ref-skills
   - cc-ref-subagents
+memory: project
 ---
 
 You are an extension validator for Claude Code. You perform read-only
