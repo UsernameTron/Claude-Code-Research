@@ -340,33 +340,35 @@ If a task requires modifying any of these, stop and ask.
 ## Project-Specific Rules
 
 ### Architecture
-- This is a **documentation and skill ecosystem** — not an application. No app code, no build step, no runtime.
-- Source docs live at `~/Desktop/Claude Code Research/` (fetched_docs/, processed/) and `~/projects/claude-code/` — these are **READ-ONLY reference**. Never modify them.
-- `skills-source/` is the version-controlled source of truth for skills deployed to `~/.claude/skills/`. Edit here, copy to deploy.
-- `agents-source/` is the version-controlled source of truth for agents deployed to `~/.claude/agents/`.
-- `desktop-skills/` holds optional condensed skills for Claude Desktop (not deployed to `~/.claude/skills/`).
+- This is a **distributable Claude Code plugin** — not an application. No app code, no build step, no runtime.
+- The project root is the plugin root. `.claude-plugin/plugin.json` is the manifest.
+- `skills/` contains all 16 skills (6 reference, 7 generators, 2 validators, 1 unified factory).
+- `agents/` contains all 3 specialist subagents.
+- `desktop-skills/` holds optional condensed skills for Claude Desktop (not part of the plugin).
+- Source docs at `~/Desktop/Claude Code Research/` and `~/projects/claude-code/` are **READ-ONLY reference** for development only. Skills are portable and do not depend on local paths.
 - Build plan lives at `~/Desktop/Claude Code Research/MASTER_BUILD_PLAN.md`.
 
 ### Conventions
 - File naming: kebab-case for all files.
 - Reference skills use `cc-ref-` prefix (e.g., `cc-ref-hooks`).
 - Generator skills use descriptive names (e.g., `hook-factory`, `skill-factory`).
-- All skills follow the directory-with-SKILL.md pattern: `skill-name/SKILL.md`.
+- All skills follow the directory-with-SKILL.md pattern: `skills/skill-name/SKILL.md`.
+- Agents follow the single-file pattern: `agents/agent-name.md`.
 - No npm, no package.json, no dependencies. Pure Markdown/YAML/Bash project.
 
-### Deployment Workflow
-- Edit skill source in `skills-source/{name}/SKILL.md`.
-- Deploy by copying to `~/.claude/skills/{name}/SKILL.md`.
-- Both locations must stay in sync. After editing source, always copy to deploy target.
-- Commit changes in `skills-source/` to the factory repo for version control.
+### Plugin & Deployment
+- The project IS the plugin. Install with `claude --plugin-dir /path/to/claude-code-factory`.
+- Plugin auto-discovery finds `skills/` and `agents/` directories automatically.
+- All skills are portable — no local file paths. They reference official Claude Code documentation generically.
+- To test locally: `claude --plugin-dir .`
+- For personal use without the plugin system, copy individual skills to `~/.claude/skills/` or agents to `~/.claude/agents/`.
 
 ### Testing
 - No automated test framework. Verification is behavioral.
-- After deploying a reference skill, test by asking a domain question and verifying Claude reads the referenced docs.
-- After deploying a generator skill, test with the specific test requests from MASTER_BUILD_PLAN.md.
+- After editing a reference skill, test by asking a domain question and verifying Claude uses the embedded schemas.
+- After editing a generator skill, test with the specific test requests from MASTER_BUILD_PLAN.md.
 - Verify SKILL.md frontmatter parses correctly (valid YAML between `---` fences).
 
 ### Boundaries
 - Never modify files in `~/Desktop/Claude Code Research/` or `~/projects/claude-code/`.
-- Never deploy a skill without first writing it to `skills-source/`.
 - Never commit `.DS_Store` files.
