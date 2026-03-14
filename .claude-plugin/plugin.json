@@ -1,0 +1,22 @@
+{
+  "name": "claude-code-factory",
+  "version": "1.0.0",
+  "description": "Generates Claude Code extensions from natural language — skills, hooks, plugins, subagents, MCP configs, settings, CI/CD pipelines, and output styles.",
+  "author": {
+    "name": "Pete Connor"
+  },
+  "repository": "https://github.com/UsernameTron/Claude-Code-Research",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "extensions",
+    "generator",
+    "skills",
+    "hooks",
+    "plugins",
+    "subagents",
+    "mcp",
+    "settings",
+    "ci-cd"
+  ]
+}
