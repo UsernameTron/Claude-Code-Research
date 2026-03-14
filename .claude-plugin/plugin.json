@@ -1,6 +1,6 @@
 {
   "name": "claude-code-factory",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Generates Claude Code extensions from natural language with invisible routing. Say what you need — the system figures out which generator, reference doc, and subagent to invoke.",
   "author": {
     "name": "Pete Connor"

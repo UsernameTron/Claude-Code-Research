@@ -71,9 +71,9 @@ Before resolving decisions, **read the authoritative docs** for the detected typ
 | **hook** | READY | Official Claude Code hooks documentation and hook schemas, or use the `cc-ref-hooks` reference skill if loaded in your context |
 | **settings** | READY | Official Claude Code settings documentation and settings schemas, or use the `cc-ref-settings` reference skill if loaded in your context |
 | **plugin** | READY | Official Claude Code plugins documentation, or use the `cc-ref-plugins` reference skill if loaded in your context |
-| **mcp** | READY | Official Claude Code MCP documentation, or use the `cc-ref-mcp` reference skill if loaded in your context |
-| **cicd** | READY | Official Claude Code GitHub Actions and GitLab CI/CD documentation, or use the `cc-ref-cicd` reference skill if loaded in your context |
-| **output-style** | READY | Official Claude Code output styles documentation, or use the `cc-ref-output-styles` reference skill if loaded in your context |
+| **mcp** | READY | Official Claude Code MCP documentation, or use the `cc-ref-mcp` reference skill (not yet created) if loaded in your context |
+| **cicd** | READY | Official Claude Code GitHub Actions and GitLab CI/CD documentation, or use the `cc-ref-cicd` reference skill (not yet created) if loaded in your context |
+| **output-style** | READY | Official Claude Code output styles documentation, or use the `cc-ref-output-styles` reference skill (not yet created) if loaded in your context |
 | **subagent** | READY | Official Claude Code subagent documentation, or use the `cc-ref-subagents` reference skill if loaded in your context |
 
 For all types: load the reference documentation or reference skill, then proceed to resolution.

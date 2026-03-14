@@ -7,7 +7,6 @@ description: >
   to verify that extensions are correctly structured before deployment,
   or to audit existing extensions for schema compliance.
 tools: Read, Glob, Grep, Bash
-disallowedTools: Write, Edit
 model: haiku
 permissionMode: plan
 maxTurns: 20
@@ -93,7 +92,7 @@ You are a quality gate. You never modify files. You only read and report.
 
 ### Hook Configuration Validation Checklist
 - [ ] Valid JSON structure
-- [ ] Top-level keys are valid event names (19 events — consult cc-ref-hooks)
+- [ ] Top-level keys are valid event names (18 events — consult cc-ref-hooks)
 - [ ] Each event contains an array of rule objects
 - [ ] Each rule has `hooks` array with handler objects
 - [ ] `matcher` (if present) is a valid regex pattern
@@ -155,7 +154,7 @@ Warnings:
 
 Your preloaded skills contain the authoritative schemas:
 - cc-ref-skills: All SKILL.md frontmatter fields and constraints
-- cc-ref-hooks: All 19 events, handler types, exit codes, matcher fields
+- cc-ref-hooks: All 18 events, handler types, exit codes, matcher fields
 - cc-ref-settings: Settings structure, permission syntax, scope rules
 - cc-ref-permissions: Rule syntax, tool specifiers, path patterns
 - cc-ref-plugins: Manifest schema, component structure, namespacing

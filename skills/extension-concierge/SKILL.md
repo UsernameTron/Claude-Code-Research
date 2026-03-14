@@ -64,7 +64,7 @@ Load the appropriate `cc-ref-*` skill before generating, so schemas are accurate
 |------|-----------------|
 | hook | `cc-ref-hooks` |
 | plugin | `cc-ref-plugins` |
-| settings | `cc-ref-settings` |
+| settings | `cc-ref-settings`, `cc-ref-permissions` |
 | skill | `cc-ref-skills` |
 | subagent | `cc-ref-subagents` |
 | mcp | (use training knowledge — no dedicated ref skill for MCP transport details) |

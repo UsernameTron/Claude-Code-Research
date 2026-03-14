@@ -48,7 +48,7 @@ cp -r agents/* ~/.claude/agents/
 | Skill | Description |
 |-------|-------------|
 | **skill-factory** | Generates SKILL.md files with correct frontmatter, invocation control, and tool restrictions |
-| **hook-factory** | Generates hook JSON configs for all 18 events and 4 handler types |
+| **hook-factory** | Generates hook JSON configs for all hook events and 4 handler types |
 | **plugin-packager** | Packages components into distributable plugins with manifest and directory structure |
 | **mcp-configurator** | Generates MCP server configurations — CLI commands, .mcp.json, scope selection |
 | **settings-architect** | Generates settings.json with permissions, sandbox, model restrictions, env vars |

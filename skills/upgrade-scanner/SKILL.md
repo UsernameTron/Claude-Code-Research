@@ -216,7 +216,7 @@ Present findings as a structured recommendation report:
 - Skills scanned: N (M with upgrade opportunities)
 - Agents scanned: N (M with upgrade opportunities)
 - Settings files scanned: N
-- Hook events in use: N of 19 available
+- Hook events in use: N of 18 available
 - Total recommendations: X HIGH, Y MEDIUM, Z LOW
 
 ## HIGH Priority Recommendations

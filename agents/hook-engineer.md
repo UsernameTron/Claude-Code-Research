@@ -38,7 +38,7 @@ more appropriate. You are for the hard cases.
    fire? What should happen on violation?
 
 2. **Map to events** — Determine which hook events are needed. Consult the
-   cc-ref-hooks skill for the complete event table (19 events). Consider:
+   cc-ref-hooks skill for the complete event table (18 events). Consider:
    - PreToolUse for blocking before execution
    - PostToolUse for validation after execution
    - Stop/SubagentStop for completion gates
@@ -94,7 +94,7 @@ they are, and what trade-offs were made.
 ## Key Technical Details
 
 Reference your preloaded skills for authoritative details on:
-- All 19 hook events and their capabilities (cc-ref-hooks)
+- All 18 hook events and their capabilities (cc-ref-hooks)
 - Permission rule syntax for hooks that interact with permissions (cc-ref-permissions)
 - Settings file scopes and merge behavior (cc-ref-settings)
 
