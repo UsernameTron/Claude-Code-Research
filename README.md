@@ -2,7 +2,7 @@
 
 A Claude Code plugin that generates correctly-structured extensions from natural language. Describe what you want — skills, hooks, plugins, subagents, MCP configs, settings, CI/CD pipelines, or output styles — and get working configurations on the first try.
 
-The factory reads official Claude Code documentation schemas before producing output, so configurations are correct by construction rather than guessed from training knowledge.
+The factory uses a three-layer architecture: an invisible router detects your intent, an orchestrator resolves all technical decisions, and specialist generators produce the output. You never choose which tool to use — just describe what you need.
 
 ## Installation
 
@@ -30,11 +30,18 @@ cp -r agents/* ~/.claude/agents/
 
 ## Components
 
-### Unified Factory (Layer 1)
+### Routing Layer (Layer 0)
 
 | Skill | Description |
 |-------|-------------|
-| **cc-factory** | Routes natural language requests to the correct generator. Entry point for all extension creation. |
+| **extension-guide** | Invisible router — detects intent and delegates to the correct handler. Never exposes routing internals. |
+
+### Orchestrator Layer (Layer 1)
+
+| Skill | Description |
+|-------|-------------|
+| **extension-concierge** | Analyzes requests, auto-resolves technical decisions, routes to generators (simple) or chains subagents (complex). |
+| **cc-factory** | Direct-access generator with full detection/resolution/output logic. Also called by the concierge. |
 
 ### Generator Skills (Layer 2)
 
@@ -55,9 +62,9 @@ cp -r agents/* ~/.claude/agents/
 | **extension-auditor** | Scans skills and agents for structural issues, frontmatter errors, and anti-patterns |
 | **upgrade-scanner** | Cross-references existing configs against latest documentation for deprecations |
 
-### Reference Skills (Layer 0)
+### Reference Skills
 
-Background knowledge loaded automatically by generators and agents. Not user-invoked.
+Background knowledge loaded automatically by generators and the concierge. Not user-invoked.
 
 | Skill | Coverage |
 |-------|----------|
@@ -79,41 +86,38 @@ Background knowledge loaded automatically by generators and agents. Not user-inv
 ## Quick Start
 
 ```
-# Generate a skill
-> Create a skill that formats SQL queries before execution
+# Just describe what you need — routing is automatic:
 
-# Generate hooks
-> Write a hook that auto-lints TypeScript files after every Write
-
-# Generate settings
-> Configure permissions to allow git commands but block curl piped to bash
-
-# Generate a CI/CD pipeline
-> Set up GitHub Actions to review PRs with Claude Code
-
-# Generate MCP config
+> I need a hook that blocks writes to .env files
+> Create a skill that formats SQL queries
+> Configure permissions to block curl piped to bash
+> Set up GitHub Actions to review PRs with Claude
 > Connect to my PostgreSQL database via MCP
-
-# Audit existing extensions
-> Scan my skills for structural issues
-
-# Package into a plugin
-> Package my skills and hooks into a distributable plugin
+> Check my skills for structural issues
+> Package my skills and hooks into a plugin
+> What's new in Claude Code that I should upgrade to?
+> My hook isn't working — help me diagnose it
 ```
 
 ## Architecture
 
 ```
-Layer 0: Reference Skills (cc-ref-*)
-         Embed critical schemas from official Claude Code docs.
-         Auto-loaded by generators — never invoked directly.
+Layer 0: Extension Guide (invisible router)
+         Detects intent → routes silently. User never sees routing.
               |
-Layer 1: Unified Factory (cc-factory)
-         Routes requests → detects type → loads references → resolves decisions.
+              ├──→ extension-concierge (CREATE, PACKAGE)
+              ├──→ extension-auditor   (AUDIT, DIAGNOSE)
+              └──→ upgrade-scanner     (UPGRADE)
+              |
+Layer 1: Extension Concierge (orchestrator)
+         Resolves decisions → dispatches to correct generator or subagent.
+              |
+              ├──→ Simple path (80%): direct to generator skill
+              └──→ Complex path (20%): chain subagents
               |
 Layer 2: Generator Skills + Specialist Subagents
-         Single-file outputs (80%): generator skills handle directly.
-         Multi-file outputs (20%): subagents coordinate complex builds.
+         Produce the actual files, configs, and manifests.
+         Reference skills (cc-ref-*) provide schema accuracy.
 ```
 
 ## Project Structure
@@ -121,25 +125,27 @@ Layer 2: Generator Skills + Specialist Subagents
 ```
 claude-code-factory/
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
-├── skills/                   # 16 skills (auto-discovered)
-│   ├── cc-factory/           # Unified factory router
-│   ├── skill-factory/        # Generators (7)
+│   └── plugin.json              # Plugin manifest
+├── skills/                      # 18 skills (auto-discovered)
+│   ├── extension-guide/         # Layer 0: invisible router
+│   ├── extension-concierge/     # Layer 1: orchestrator
+│   ├── cc-factory/              # Direct-access generator
+│   ├── skill-factory/           # Generators (7)
 │   ├── hook-factory/
 │   ├── plugin-packager/
 │   ├── mcp-configurator/
 │   ├── settings-architect/
 │   ├── cicd-generator/
 │   ├── output-style-creator/
-│   ├── extension-auditor/    # Validators (2)
+│   ├── extension-auditor/       # Validators (2)
 │   ├── upgrade-scanner/
-│   ├── cc-ref-hooks/         # Reference skills (6)
+│   ├── cc-ref-hooks/            # Reference skills (6)
 │   ├── cc-ref-settings/
 │   ├── cc-ref-skills/
 │   ├── cc-ref-permissions/
 │   ├── cc-ref-plugins/
 │   └── cc-ref-subagents/
-├── agents/                   # 3 specialist subagents
+├── agents/                      # 3 specialist subagents
 │   ├── hook-engineer.md
 │   ├── plugin-builder.md
 │   └── extension-validator.md

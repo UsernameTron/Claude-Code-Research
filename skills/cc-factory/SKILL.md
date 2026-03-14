@@ -1,12 +1,14 @@
 ---
 name: cc-factory
 description: |
-  Generates Claude Code extensions from natural language — skills, hooks,
-  settings, plugins, MCP configs, CI/CD pipelines, output styles, and subagents.
-  Use when creating, generating, scaffolding, building, or setting up any Claude
-  Code extension. Triggers on: "create a skill", "write a hook", "set up MCP",
-  "configure settings", "make a plugin", "build a subagent", "output style",
-  "set up CI/CD", "GitHub Actions for Claude".
+  Direct-access generator for Claude Code extensions — skills, hooks, settings,
+  plugins, MCP configs, CI/CD pipelines, output styles, and subagents. This is
+  the hands-on generator with full detection, resolution, and output logic.
+  For automatic routing, use the extension-guide (Layer 0) which delegates to
+  the extension-concierge (Layer 1) which calls this and other generators.
+  Use when explicitly invoking the factory by name or when you want full control
+  over the generation process. Triggers on: "cc-factory", "use the factory",
+  direct "/cc-factory" invocation.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -16,6 +18,10 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 
 You are an extension factory for Claude Code. When the user describes what they
 want, you produce correctly-structured files ready for deployment.
+
+> **Note:** This skill is also called by the extension-concierge (Layer 1) as
+> part of the automatic routing system. It works identically whether invoked
+> directly or via the concierge.
 
 **4-step process — execute in order, every time:**
 

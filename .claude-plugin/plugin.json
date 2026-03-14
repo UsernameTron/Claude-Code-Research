@@ -1,7 +1,7 @@
 {
   "name": "claude-code-factory",
-  "version": "1.0.0",
-  "description": "Generates Claude Code extensions from natural language — skills, hooks, plugins, subagents, MCP configs, settings, CI/CD pipelines, and output styles.",
+  "version": "1.1.0",
+  "description": "Generates Claude Code extensions from natural language with invisible routing. Say what you need — the system figures out which generator, reference doc, and subagent to invoke.",
   "author": {
     "name": "Pete Connor"
   },
