@@ -1,95 +1,115 @@
-# Current Task: Phase 3 — Validators
-**Branch**: `feat/phase-3-validators`
+# Current Task: Phase 2 — Specialized Generators
+**Branch**: `feat/phase-2-generators`
 **Started**: 2026-03-13
 
 ## Plan
 
-### 3.1 — Extension Auditor (`extension-auditor`)
-- [x] Write `skills-source/extension-auditor/SKILL.md`
-  - [x] Frontmatter: name, description, disable-model-invocation, allowed-tools (read-only)
-  - [x] Section 1: Role & scan targets (~/.claude/skills/, ~/.claude/agents/, settings files)
-  - [x] Section 2: Skill validation rules (frontmatter fields, size, description quality)
-  - [x] Section 3: Agent validation rules (frontmatter fields, tool profiles, model selection)
-  - [x] Section 4: Hook config validation (event names, matcher syntax, handler types)
-  - [x] Section 5: Settings validation (deprecated syntax, scope placement, permission rules)
-  - [x] Section 6: Cross-extension checks (trigger collisions, naming conflicts)
-  - [x] Section 7: Output format (CRITICAL / RECOMMEND / OPTIMIZE severity report)
-- [x] Deploy to `~/.claude/skills/extension-auditor/SKILL.md`
-- [x] Test against 4 deployed factory skills (cc-factory, cc-ref-hooks, cc-ref-settings, cc-ref-skills)
-- [x] Test against agents in ~/.claude/agents/
-- [x] Fix any false positives and redeploy — No false positives found
+### 2.1 — Skill Factory (`skill-factory`)
+- [x] Write `skills-source/skill-factory/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & auto-resolution workflow
+  - [x] Section 2: Frontmatter field resolution (all 11 documented fields)
+  - [x] Section 3: Body structure guidance (progressive disclosure, size limits)
+  - [x] Section 4: Output protocol (file paths, testing steps)
+  - [x] Reference loading: cc-ref-skills
+- [x] Deploy to `~/.claude/skills/skill-factory/SKILL.md`
+- [ ] Test: "create a skill that validates JSON schemas"
 
-### 3.2 — Upgrade Scanner (`upgrade-scanner`)
-- [x] Write `skills-source/upgrade-scanner/SKILL.md`
-  - [x] Frontmatter: name, description, disable-model-invocation, allowed-tools (read-only)
-  - [x] Section 1: Scan Protocol + reference loading
-  - [x] Section 2: Skill upgrade detection (unused features, deprecated patterns)
-  - [x] Section 3: Agent upgrade detection (unused features, deprecated patterns)
-  - [x] Section 4: Hook upgrade detection (missing events, handler upgrades, matchers)
-  - [x] Section 5: Settings upgrade detection (deprecated settings, missing beneficial settings, MCP)
-  - [x] Section 6: Cross-extension opportunities (architecture, documentation drift)
-  - [x] Section 7: Output format (HIGH / MEDIUM / LOW priority report with before/after)
-- [x] Deploy to `~/.claude/skills/upgrade-scanner/SKILL.md`
-- [x] Test: scan cc-ref-* skills against fetched_docs for drift
-- [x] Fix false positives: added passive-skill skip rule for `user-invocable: false` skills
-- [x] Redeploy with fix
+### 2.2 — Hook Factory (`hook-factory`)
+- [x] Write `skills-source/hook-factory/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & workflow (detect → load → resolve → output)
+  - [x] Section 2: Intent-to-event mapping
+  - [x] Section 3: Handler type selection (command, http, prompt, agent)
+  - [x] Section 4: Auto-resolution engine (event, matcher, handler, blocking, scope)
+  - [x] Section 5: Output protocol (JSON config, script files, merge behavior, test steps)
+  - [x] Reference loading: cc-ref-hooks
+- [x] Deploy to `~/.claude/skills/hook-factory/SKILL.md`
+- [ ] Test: "create a hook that blocks rm -rf commands"
+
+### 2.3 — Plugin Packager (`plugin-packager`)
+- [x] Write `skills-source/plugin-packager/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & packaging workflow
+  - [x] Section 2: Manifest schema resolution (plugin.json fields)
+  - [x] Section 3: Directory structure generation
+  - [x] Section 4: Component migration (existing skills/agents/hooks → plugin)
+  - [x] Reference loading: plugins-reference.md (authoritative source)
+- [x] Deploy to `~/.claude/skills/plugin-packager/SKILL.md`
+- [ ] Test: "package my code-reviewer agent into a plugin"
+
+### 2.4 — MCP Configurator (`mcp-configurator`)
+- [x] Write `skills-source/mcp-configurator/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & configuration workflow
+  - [x] Section 2: Transport type resolution (HTTP over SSE)
+  - [x] Section 3: Scope & auth resolution (OAuth, API keys, env vars)
+  - [x] Section 4: Output protocol (.mcp.json or CLI commands)
+  - [x] Reference loading: mcp.md (authoritative source)
+- [x] Deploy to `~/.claude/skills/mcp-configurator/SKILL.md`
+- [ ] Test: "connect to a PostgreSQL database via MCP"
+
+### 2.5 — Settings Architect (`settings-architect`)
+- [x] Write `skills-source/settings-architect/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & settings workflow
+  - [x] Section 2: Scope resolution (user/project/local/managed)
+  - [x] Section 3: Permission rule syntax builder
+  - [x] Section 4: Sandbox, model, env configuration
+  - [x] Reference loading: cc-ref-settings
+- [x] Deploy to `~/.claude/skills/settings-architect/SKILL.md`
+- [ ] Test: "create settings that lock to Sonnet and block curl"
+
+### 2.6 — CI/CD Pipeline Generator (`cicd-generator`)
+- [x] Write `skills-source/cicd-generator/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & pipeline workflow
+  - [x] Section 2: Platform resolution (GitHub Actions, GitLab)
+  - [x] Section 3: Claude Code action configuration
+  - [x] Section 4: Output protocol (workflow YAML, secrets, test steps)
+  - [x] Reference loading: github-actions.md, gitlab-ci-cd.md, headless.md
+- [x] Deploy to `~/.claude/skills/cicd-generator/SKILL.md`
+- [ ] Test: "create a GitHub Action that reviews PRs with Claude"
+
+### 2.7 — Output Style Creator (`output-style-creator`)
+- [x] Write `skills-source/output-style-creator/SKILL.md`
+  - [x] Frontmatter: name, description, allowed-tools
+  - [x] Section 1: Role & style creation workflow
+  - [x] Section 2: Tone/format/audience resolution
+  - [x] Section 3: Output style vs system prompt vs CLAUDE.md distinction
+  - [x] Section 4: Output protocol (style file with frontmatter)
+  - [x] Reference loading: output-styles.md
+- [x] Deploy to `~/.claude/skills/output-style-creator/SKILL.md`
+- [ ] Test: "create an output style for executive briefings"
 
 ## Verification
-
-### Extension Auditor
-- [x] YAML frontmatter parses correctly
-- [x] Under 500 lines total (270 lines)
-- [x] Validation rules match documented schemas (cc-ref-skills, cc-ref-hooks, cc-ref-settings)
-- [x] No false positives on correctly-structured factory skills (all 5 skills passed clean)
-- [x] Catches real issues in existing agents/skills (14 findings: 8 RECOMMEND, 6 OPTIMIZE)
+- [x] All 7 skills have valid YAML frontmatter
+- [x] All skills under 500 lines (max: 304, min: 163)
+- [x] Each skill references its authoritative doc source correctly
 - [x] No TODO/FIXME left behind
-
-### Upgrade Scanner
-- [x] YAML frontmatter parses correctly (4 fields: name, description, disable-model-invocation, allowed-tools)
-- [x] Under 500 lines total (295 lines)
-- [x] No documentation drift: cc-ref-skills fields match fetched_docs/skills.md (10/10 fields)
-- [x] No documentation drift: cc-ref-hooks events match fetched_docs/hooks.md (18/18 events)
-- [x] No documentation drift: cc-ref-settings keys match fetched_docs/settings.md (no contradictions)
-- [x] All authoritative source paths verified accessible (10/10 paths exist)
-- [x] False positives fixed: passive-skill skip rule prevents recommendations for `user-invocable: false` skills
-- [x] No TODO/FIXME left behind
-- [ ] Diff reviewed: only intended files changed
+- [ ] Each skill tested with at least one generation request
+- [x] Diff reviewed: all 7 source/deploy pairs identical
 
 ## Results
 
-**Verification date**: 2026-03-13
-**Test scope**: 5 skills, 13 agents, 1 settings file (19 files total)
-**Score**: 0 CRITICAL, 8 RECOMMEND, 6 OPTIMIZE
+**Build date**: 2026-03-13
+**All 7 generators written and deployed:**
 
-### Key findings in existing agents:
-- **Missing skills references**: architect.md references 3 non-existent skills (frontmatter-reference, agent-design-patterns, mcp-catalog)
-- **Unknown frontmatter fields**: `background`, `color` fields in several agents — may be valid but undocumented
-- **Long agent bodies**: 10 of 13 agents exceed 100-line body recommendation
-- **Literal `\n` in descriptions**: 8 agents use `\n` instead of YAML block scalars
-- **Trigger overlap**: google-media-generation and sora-video-generator both trigger on "generate video"
+| Skill | Lines | Reference Source |
+|-------|-------|-----------------|
+| hook-factory | 304 | cc-ref-hooks |
+| skill-factory | 218 | cc-ref-skills |
+| cicd-generator | 212 | github-actions.md, gitlab-ci-cd.md, headless.md |
+| output-style-creator | 225 | output-styles.md |
+| plugin-packager | 179 | plugins-reference.md |
+| mcp-configurator | 176 | mcp.md |
+| settings-architect | 163 | cc-ref-settings |
 
-### Factory skills — all clean:
-- cc-factory: Valid frontmatter, 248 lines, correct allowed-tools
-- cc-ref-hooks: Valid frontmatter, user-invocable: false correctly set
-- cc-ref-settings: Valid frontmatter, user-invocable: false correctly set
-- cc-ref-skills: Valid frontmatter, user-invocable: false correctly set
-- extension-auditor: Valid frontmatter, disable-model-invocation: true correctly set
-
-### Upgrade Scanner Results
-
-**Verification date**: 2026-03-13
-**Test scope**: 3 cc-ref-* skills scanned against fetched_docs for drift
-**Drift detected**: None — all field lists, event lists, and settings keys in sync
-
-**Source doc path verification**: 10/10 paths accessible
-- fetched_docs/skills.md, best-practices.md
-- fetched_docs/hooks.md, hooks-guide.md
-- fetched_docs/settings.md
-- processed/Session_8_Schemas.md
-- projects/claude-code/plugins/plugin-dev/skills/hook-development/SKILL.md
-- projects/claude-code/examples/hooks/, examples/settings/
-
-**False positive fix**: Initial version generated 4 false positives for `user-invocable: false` skills (recommending allowed-tools, hooks, !command, model for passive background-knowledge skills). Added "Skip passive skills" rule to Section 2 to filter these out.
+**All deploy diffs**: identical (7/7)
+**All frontmatter**: valid YAML, correct names
 
 ## Session Handoff
-<!-- Add if task spans multiple sessions -->
+
+All 7 Phase 2 generators are written and deployed. Remaining work:
+- Behavioral testing of each skill in a new session
+- Commit to `feat/phase-2-generators` branch
