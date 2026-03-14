@@ -71,10 +71,14 @@ plugin-name/
 ├── skills/                   # Auto-discovered
 │   └── my-skill/
 │       └── SKILL.md
+├── commands/                 # Legacy, prefer skills
+│   └── my-command.md
 ├── agents/                   # Auto-discovered
 │   └── my-agent.md
 ├── hooks/                    # Must be referenced
 │   └── hooks.json
+├── output-styles/            # Output style definitions
+│   └── my-style.md
 ├── scripts/                  # Supporting scripts
 │   └── format.sh
 ├── .mcp.json                 # Auto-discovered
@@ -159,14 +163,19 @@ dev-tools/
 ├── skills/
 │   ├── code-review/SKILL.md
 │   └── deploy/SKILL.md
+├── commands/
+│   └── run-suite.md
 ├── agents/
 │   └── test-runner.md
 ├── hooks/
 │   └── hooks.json
+├── output-styles/
+│   └── team-standard.md
 ├── scripts/
 │   ├── lint.sh
 │   └── format.sh
 ├── .mcp.json
+├── .lsp.json
 └── README.md
 ```
 

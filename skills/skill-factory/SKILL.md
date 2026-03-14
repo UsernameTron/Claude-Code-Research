@@ -100,6 +100,19 @@ Show a table:
 ---
 name: skill-name
 description: What it does. When to use it.
+# argument-hint: [filename]              # Shows usage hint; omit if no arguments
+# disable-model-invocation: false        # Set true to prevent Claude auto-invoking
+# user-invocable: true                   # Set false for background-only knowledge
+# allowed-tools: Read, Grep, Glob        # Omit to inherit all tools
+# model: sonnet                          # Omit to inherit; opus | sonnet | haiku
+# context: fork                          # Omit for inline (default); fork for isolation
+# agent: general-purpose                 # Only with context: fork; Explore | Plan | general-purpose
+# hooks:                                 # Lifecycle hooks (rare); YAML block
+#   PostToolUse:
+#     - matcher: "Write|Edit"
+#       hooks:
+#         - type: command
+#           command: "prettier --write $CLAUDE_FILE_PATH"
 ---
 
 # Skill Name
@@ -111,6 +124,18 @@ description: What it does. When to use it.
 [Expected output format if applicable]
 ```
 
+> **`context: fork` vs inline (default):** Use `context: fork` when the skill
+> performs heavy processing, read-only analysis, or long-running operations that
+> could pollute the parent conversation context. Keep inline (omit `context`)
+> for lightweight skills that benefit from sharing the parent context.
+
+> **`.claude/rules/` alternative:** For project-level rules that apply
+> conditionally based on file paths (e.g., different standards for `src/` vs
+> `tests/`), consider using `.claude/rules/*.md` files instead of a SKILL.md.
+> Rules files support path-based conditional loading via glob patterns in
+> filenames (e.g., `.claude/rules/src__*.md` applies only when working in `src/`).
+> Use skills for capabilities and workflows; use rules for project conventions.
+
 ### Complex Skills (100-500 lines)
 
 ```markdown
@@ -118,6 +143,13 @@ description: What it does. When to use it.
 name: skill-name
 description: What it does. When to use it.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+# argument-hint: [input] [options]       # Shows usage hint; omit if no arguments
+# disable-model-invocation: false        # Set true for manual-only invocation
+# model: sonnet                          # Omit to inherit; opus | sonnet | haiku
+# context: fork                          # Omit for inline (default); fork for isolation
+# agent: general-purpose                 # Only with context: fork
+# hooks:                                 # Lifecycle hooks (rare)
 ---
 
 # Skill Name

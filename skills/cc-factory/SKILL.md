@@ -51,7 +51,7 @@ Apply in priority order — first match wins:
 | 3 | **mcp** | "MCP", "connect to", "integrate with", "OAuth", "external service", "GitHub/Slack/Notion server" |
 | 4 | **cicd** | "CI/CD", "GitHub Actions", "pipeline", "PR review automation", "deploy with Claude" |
 | 5 | **settings** | "settings", "configure", "lock model", "sandbox", "permissions", "allow/deny" |
-| 6 | **subagent** | "subagent", "agent that", "specialist", "delegate to", "autonomous" |
+| 6 | **subagent** | "subagent", "agent that", "specialist", "delegate to", "autonomous", "orchestrate agents" |
 | 7 | **output-style** | "output style", "writing style", "tone", "format responses as", "executive briefing" |
 | 8 | **skill** | Everything else — skill is the catch-all. Any "create/build/make a [thing] that [does X]" |
 
@@ -75,6 +75,12 @@ Before resolving decisions, **read the authoritative docs** for the detected typ
 | **cicd** | READY | Official Claude Code GitHub Actions and GitLab CI/CD documentation, or use the `cc-ref-cicd` reference skill (not yet created) if loaded in your context |
 | **output-style** | READY | Official Claude Code output styles documentation, or use the `cc-ref-output-styles` reference skill (not yet created) if loaded in your context |
 | **subagent** | READY | Official Claude Code subagent documentation, or use the `cc-ref-subagents` reference skill if loaded in your context |
+| **multi-agent** | READY | For complex multi-component systems requiring orchestration, use the `cc-ref-multi-agent` reference skill if loaded in your context |
+
+> **Note:** `cc-ref-multi-agent` provides orchestration guidance for complex
+> multi-component systems (e.g., multiple agents collaborating, agent-to-agent
+> delegation, or multi-skill workflows). Load it when a request involves
+> coordinating multiple subagents or building an agent hierarchy.
 
 For all types: load the reference documentation or reference skill, then proceed to resolution.
 If a reference skill is not available and official docs cannot be found, proceed with

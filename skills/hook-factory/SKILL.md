@@ -65,6 +65,9 @@ Match the user's intent to the correct hook event. First match wins:
 | "when task completes" | `TaskCompleted` | (none) |
 | "when teammate idles" | `TeammateIdle` | (none) |
 | "on worktree create" | `WorktreeCreate` | (none) |
+| "on worktree remove/cleanup" | `WorktreeRemove` | (none) |
+| "when subagent starts" | `SubagentStart` | Agent type |
+| "after instructions load" | `InstructionsLoaded` | (none) |
 | "block MCP tool" | `PreToolUse` | `mcp__server__tool` pattern |
 
 If the intent doesn't clearly map, ask ONE clarifying question with the top
@@ -291,7 +294,26 @@ Provide:
 
 ---
 
-## 7. Validation Checklist
+## 7. Guardrails Triad
+
+Hooks are one leg of the Claude Code safety architecture. When designing hooks,
+consider how they interact with the other two mechanisms:
+
+| Mechanism | Purpose | Scope |
+|-----------|---------|-------|
+| **Hooks** | Custom logic at lifecycle events — validate, block, transform, notify | Behavioral automation |
+| **Permission modes** | `default`, `acceptEdits`, `plan`, `bypassPermissions` — controls what Claude can do without asking | Session-level access control |
+| **Tool allow/deny lists** | `permissions.allow`, `permissions.deny`, `permissions.ask` in settings — whitelist/blacklist specific tool patterns | Granular tool gating |
+
+These three work together. For example, a `PreToolUse` hook that blocks `rm -rf`
+complements a `permissions.deny` rule for `Bash(rm -rf:*)` — the deny list
+prevents execution entirely, while the hook can provide a nuanced response or
+log the attempt. Choose the simplest mechanism that achieves the goal; combine
+when defense-in-depth is needed.
+
+---
+
+## 8. Validation Checklist
 
 Before presenting the final output, verify:
 
