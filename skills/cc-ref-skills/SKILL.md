@@ -84,6 +84,28 @@ Same-name conflicts: enterprise > personal > project. Plugin skills use `plugin-
 - Use `allowed-tools` to restrict permissions for safety
 - `.claude/commands/*.md` still works — skills take precedence on name conflicts
 
+## CLAUDE.md Behavior
+
+### Loading Hierarchy (Broadest to Most Specific)
+
+| Scope | Location | Notes |
+|-------|----------|-------|
+| Managed | Enterprise, MDM-deployed | Cannot be excluded by individuals |
+| User | `~/.claude/CLAUDE.md` | Personal, all projects |
+| Project | `./CLAUDE.md` or `./.claude/CLAUDE.md` | Shared via version control |
+| Ancestor directories | Walking up from cwd | Loaded automatically |
+| Subdirectory | On demand when Claude reads files there | Loaded contextually |
+
+### Key Behaviors
+
+- **@import syntax**: `@path/to/import` includes additional files, recursive to 5 hops
+- **Rules directory**: `.claude/rules/` enables topic-specific rule files with optional YAML frontmatter containing `paths` globs for conditional loading
+- **Loaded as user message**: CLAUDE.md is injected as a user message, NOT as a system prompt
+- **Survives compaction**: Re-read from disk after context compaction
+- **No routing**: CLAUDE.md CANNOT define routing rules — routing is driven by agent `description` fields in `.claude/agents/` files
+- **Subagent isolation**: Subagents do NOT inherit CLAUDE.md content — they operate with only their markdown body as context
+- **SDK loading**: Only loaded when `settingSources: ["project"]` is explicitly configured in the Agent SDK
+
 ## Authoritative Sources
 
 When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for skills. Key pages to consult:

@@ -98,6 +98,31 @@ Evaluation order: **deny → ask → allow** (first match wins).
 | `DISABLE_TELEMETRY` | Opt out of telemetry |
 | `DISABLE_AUTOUPDATER` | Disable auto-updates |
 
+## Auto Memory
+
+Available since v2.1.59+. Claude decides what to remember across sessions: build commands, debugging insights, architecture notes, code style preferences.
+
+- Stored as plain markdown, browsable via `/memory`
+- Toggle with `/memory` command or `autoMemoryEnabled` setting
+- Enabled by default
+- There is no standalone MEMORY.md for the main agent — MEMORY.md is a subagent-only feature
+
+## Session Persistence
+
+Full conversation history is stored as `.jsonl` files in `~/.claude/projects/<encoded-cwd>/<session-id>.jsonl`.
+
+- Resume via `--continue` (most recent) or `--resume` (picker)
+- Fork support for branching conversations
+- The Agent SDK adds file checkpointing and rewind capabilities
+
+## Context Compaction
+
+When approaching token limits, Claude summarizes the conversation to free context space.
+
+- CLAUDE.md is re-injected fresh after compaction (re-read from disk)
+- `PreCompact` hook event fires before compaction occurs
+- Recommend saving progress and state to memory before compaction
+
 ## Authoritative Sources
 
 When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for settings. Key pages to consult:

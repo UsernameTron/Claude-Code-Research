@@ -12,6 +12,8 @@ user-invocable: false
 
 # Claude Code Reference: Hooks
 
+> **Guardrails Triad**: Hooks are one of three guard systems in Claude Code, alongside permission modes and tool allow/deny lists. Together these three systems constrain agent behavior at different levels.
+
 ## Quick Reference
 
 ### Hook Configuration Structure
@@ -100,6 +102,20 @@ Uses `hookSpecificOutput` (NOT top-level `decision`):
 | `cwd` | string | Current working directory |
 | `permission_mode` | string | Current mode |
 | `hook_event_name` | string | Event that fired |
+
+## SDK Hooks Integration
+
+The Agent SDK provides typed callbacks at lifecycle points as code, distinct from the JSON-configured hooks above.
+
+| SDK Hook | Purpose |
+|----------|---------|
+| `PreToolUse` | Can deny tool execution programmatically |
+| `PostToolUse` | React after tool completes |
+| `SubagentStart` | Fires when a subagent is spawned |
+| `Notification` | Handle notifications programmatically |
+| `UserPromptSubmit` | Intercept user prompts |
+
+SDK hooks are **code callbacks** (Python/TypeScript functions), not JSON configuration. They provide the same lifecycle interception as config hooks but with full programmatic control.
 
 ## Authoritative Sources
 

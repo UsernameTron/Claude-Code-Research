@@ -118,6 +118,47 @@ claude --plugin-dir ./my-plugin   # Test locally
 /help                              # See plugin skills listed
 ```
 
+## Marketplace CLI Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/plugin marketplace add` | Add a marketplace source |
+| `/plugin install` | Install a plugin from a marketplace |
+| `/plugin uninstall` | Remove an installed plugin |
+| `/plugin` | Open the plugin manager UI |
+
+The official marketplace repository lives at `github.com/anthropics/claude-plugins-official`.
+
+## Reference Plugins
+
+The official Claude Code repository includes several reference plugins:
+
+| Plugin | Description |
+|--------|-------------|
+| Code review | Runs 5 parallel Sonnet agents for different review dimensions |
+| Feature development | Includes explorer, architect, and reviewer agents |
+| Agent SDK development | Provides `/new-sdk-app` scaffolding and verification agents |
+| Plugin development toolkit | 8-phase guided workflow for plugin creation |
+
+## Plugin Enablement Configuration
+
+Control per-plugin enablement and custom marketplaces in settings.json:
+
+```json
+{
+  "enabledPlugins": {
+    "formatter@acme-tools": true,
+    "deployer@acme-tools": true
+  },
+  "extraKnownMarketplaces": {
+    "acme-tools": {
+      "source": "github",
+      "repo": "acme-corp/claude-plugins"
+    }
+  }
+}
+```
+
 ## Authoritative Sources
 
 When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for plugins. Key pages to consult:
