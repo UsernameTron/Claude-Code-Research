@@ -9,6 +9,8 @@ description: |
   "configure settings", "set permissions", "lock model", "enable sandbox",
   "allow/deny tool", "restrict access", "settings.json".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-settings
 ---
 
 # Settings Architect — Claude Code Settings Generator

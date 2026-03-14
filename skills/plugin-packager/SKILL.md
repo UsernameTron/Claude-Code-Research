@@ -9,6 +9,8 @@ description: |
   Triggers on: "create a plugin", "package into plugin", "bundle skills",
   "make a plugin", "plugin manifest", "distribute", "marketplace".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-plugins
 ---
 
 # Plugin Packager — Claude Code Plugin Generator

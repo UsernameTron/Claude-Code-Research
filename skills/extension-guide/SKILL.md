@@ -13,6 +13,8 @@ description: |
   "configure MCP", "create an agent", "output style".
   Also triggers on passive mentions of hooks, settings, permissions, skills,
   agents, plugins, MCP, or CI/CD during normal project work.
+user-invocable: false
+argument-hint: "<describe what you want to build, audit, upgrade, or package>"
 ---
 
 # Extension Guide — Invisible Router (Layer 0)

@@ -9,6 +9,7 @@ description: |
   style", "response format", "tone", "create a style", "executive briefing
   style", "format responses as".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
 ---
 
 # Output Style Creator — Claude Code Output Style Generator

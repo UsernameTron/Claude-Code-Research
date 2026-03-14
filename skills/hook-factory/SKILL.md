@@ -9,6 +9,8 @@ description: |
   lifecycle event. Triggers on: "create a hook", "block command", "auto-lint",
   "validate before", "on session start", "prevent", "after file write".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-hooks
 ---
 
 # Hook Factory — Claude Code Hook Generator

@@ -9,6 +9,8 @@ description: |
   capability. Triggers on: "create a skill", "write a skill", "new skill",
   "generate SKILL.md", "build a slash command", "make a skill that".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-skills
 ---
 
 # Skill Factory — Claude Code Skill Generator

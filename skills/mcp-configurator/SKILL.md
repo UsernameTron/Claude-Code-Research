@@ -9,6 +9,8 @@ description: |
   database/API connections. Triggers on: "connect to", "add MCP", "set up MCP",
   "integrate with", "MCP server", "connect database", "add GitHub/Slack/Notion".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+user-invocable: true
+skills: cc-ref-settings
 ---
 
 # MCP Configurator — Claude Code MCP Server Generator
