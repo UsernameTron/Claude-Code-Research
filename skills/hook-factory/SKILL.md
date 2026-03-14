@@ -24,8 +24,9 @@ produce the JSON config and any supporting scripts.
 1. **DETECT** — Map the user's intent to a hook event and handler type.
    Announce: "I'll create a **[event]** hook using a **[handler type]** handler."
 2. **LOAD** — Read the cc-ref-hooks reference skill (already in context as
-   background knowledge). For complex cases, read the authoritative source:
-   `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/hooks.md`
+   background knowledge). For complex cases, read the official Claude Code
+   documentation for hooks, or use the `cc-ref-hooks` reference skill if
+   loaded in your context.
 3. **RESOLVE** — Make all technical decisions using the Resolution Engine below.
    Present resolved decisions to the user before writing.
 4. **OUTPUT** — Write the JSON config and any script files. Provide merge

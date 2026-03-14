@@ -24,8 +24,9 @@ and any supporting files.
 1. **CLASSIFY** — Determine the skill type from the user's description.
    Announce: "I'll create a **[type]** skill named **[name]**."
 2. **LOAD** — Read the cc-ref-skills reference skill (already in context as
-   background knowledge). For edge cases, read the authoritative source:
-   `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/skills.md`
+   background knowledge). For edge cases, read the official Claude Code
+   documentation for skills, or use the `cc-ref-skills` reference skill if
+   loaded in your context.
 3. **RESOLVE** — Make all technical decisions using the Resolution Engine below.
    Present resolved decisions to the user before writing.
 4. **OUTPUT** — Write the SKILL.md and any supporting files. Provide file paths,

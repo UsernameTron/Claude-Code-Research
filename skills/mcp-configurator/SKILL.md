@@ -23,8 +23,8 @@ with proper transport, authentication, and scope.
 
 1. **IDENTIFY** — Determine the service and transport type.
    Announce: "I'll configure a **[transport]** MCP connection to **[service]**."
-2. **LOAD** — Read the authoritative reference:
-   `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/mcp.md`
+2. **LOAD** — Read the official Claude Code documentation for MCP servers,
+   or use the `cc-ref-mcp` reference skill if loaded in your context.
 3. **RESOLVE** — Make all technical decisions using the Resolution Engine below.
    Present resolved decisions to the user before writing.
 4. **OUTPUT** — Provide the CLI command or .mcp.json config, plus auth and

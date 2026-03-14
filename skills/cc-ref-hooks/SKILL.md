@@ -103,12 +103,14 @@ Uses `hookSpecificOutput` (NOT top-level `decision`):
 
 ## Authoritative Sources
 
-When you need complete documentation for hooks, read these files:
+When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for hooks. Key pages to consult:
 
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/hooks.md` — Complete hook documentation (83KB): all events, input/output schemas, handler types, configuration examples
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/hooks-guide.md` — Practical hook guide (31KB): tutorials, common patterns, getting started
-- `/Users/cpconnor/Desktop/Claude Code Research/processed/Session_8_Schemas.md` — Pre-extracted hook event tables (64KB): cross-validated schemas, handler comparison, exit code behavior summary, tool input schemas per event
-- `/Users/cpconnor/projects/claude-code/plugins/plugin-dev/skills/hook-development/SKILL.md` — Plugin hook development patterns, advanced prompt-based hooks API, migration guides
-- `/Users/cpconnor/projects/claude-code/examples/hooks/` — Example hook configurations
+- Hooks documentation — complete hook docs: all events, input/output schemas, handler types, configuration examples
+- Hooks guide — practical tutorials, common patterns, getting started
+- Pre-extracted schema tables — cross-validated hook event schemas, handler comparison, exit code behavior summary, tool input schemas per event
+- Plugin hook development patterns — advanced prompt-based hooks API, migration guides
+- Example hook configurations
 
-Read the actual files. Do not rely on training knowledge for event names, matcher fields, hookSpecificOutput structure, handler type capabilities, or exit code semantics. The files above contain the current, verified Anthropic documentation.
+The Quick Reference section above contains the critical schemas for most tasks. Consult the full documentation only when the Quick Reference does not cover your specific question.
+
+Read the actual documentation files. Do not rely on training knowledge for event names, matcher fields, hookSpecificOutput structure, handler type capabilities, or exit code semantics.

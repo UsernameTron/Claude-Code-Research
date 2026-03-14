@@ -24,8 +24,8 @@ style file that modifies the system prompt.
 1. **ANALYZE** — Extract tone, format, audience, and constraints from the
    request. Announce: "I'll create an output style named **[name]** for
    **[audience/purpose]**."
-2. **LOAD** — Read the authoritative reference:
-   `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/output-styles.md`
+2. **LOAD** — Read the official Claude Code documentation for output styles,
+   or use the `cc-ref-output-styles` reference skill if loaded in your context.
 3. **RESOLVE** — Make all decisions using the Resolution Engine.
    Present the style definition to the user before writing.
 4. **OUTPUT** — Write the style file. Provide activation instructions.

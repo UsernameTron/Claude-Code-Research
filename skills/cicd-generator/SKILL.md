@@ -22,10 +22,10 @@ GitHub Actions or GitLab CI/CD workflows.
 
 1. **IDENTIFY** — Determine platform (GitHub/GitLab) and use case.
    Announce: "I'll create a **[platform]** workflow for **[use case]**."
-2. **LOAD** — Read the authoritative references:
-   - GitHub: `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/github-actions.md`
-   - GitLab: `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/gitlab-ci-cd.md`
-   - Headless: `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/headless.md`
+2. **LOAD** — Read the official Claude Code documentation for the relevant
+   platform, or use the `cc-ref-cicd` reference skill if loaded in your
+   context. Key topics: GitHub Actions integration, GitLab CI/CD setup,
+   and headless/non-interactive CLI usage.
 3. **RESOLVE** — Make all decisions using the Resolution Engine.
    Present the workflow to the user before writing.
 4. **OUTPUT** — Write the workflow file and provide setup instructions.

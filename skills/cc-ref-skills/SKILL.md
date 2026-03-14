@@ -86,9 +86,11 @@ Same-name conflicts: enterprise > personal > project. Plugin skills use `plugin-
 
 ## Authoritative Sources
 
-When you need complete documentation for skills, read these files:
+When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for skills. Key pages to consult:
 
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/skills.md` — Complete skills documentation (35KB): frontmatter reference, invocation control, arguments, dynamic context, subagent execution, supporting files, visual output, permission restrictions
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/best-practices.md` — Skill best practices (32KB): writing effective descriptions, conciseness rules, token cost awareness, progressive disclosure, common anti-patterns, validation checklists
+- Skills documentation — frontmatter reference, invocation control, arguments, dynamic context, subagent execution, supporting files, visual output, permission restrictions
+- Skills best practices — writing effective descriptions, conciseness rules, token cost awareness, progressive disclosure, common anti-patterns, validation checklists
 
-Read the actual files. Do not rely on training knowledge for frontmatter field names, invocation behavior, substitution syntax, or context fork semantics. The files above contain the current, verified Anthropic documentation.
+The Quick Reference section above contains the critical schemas for most tasks. Consult the full documentation only when the Quick Reference does not cover your specific question.
+
+Read the actual documentation files. Do not rely on training knowledge for frontmatter field names, invocation behavior, substitution syntax, or context fork semantics.

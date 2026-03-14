@@ -93,10 +93,12 @@ Format: `Tool` or `Tool(specifier)`
 
 ## Authoritative Sources
 
-When you need complete documentation for permissions, read these files:
+When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for permissions. Key pages to consult:
 
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/permissions.md` — Complete permissions documentation (14KB): rule syntax, tool-specific rules, wildcard patterns, path patterns, permission modes, hooks integration
-- `/Users/cpconnor/Desktop/Claude Code Research/processed/Session_8_Schemas.md` — Pre-extracted permission syntax tables (64KB): cross-validated rule patterns, mode descriptions, tool specifier formats
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/settings.md` — Settings file locations and merge behavior (58KB): where permission rules are defined, scope precedence
+- Permissions documentation — rule syntax, tool-specific rules, wildcard patterns, path patterns, permission modes, hooks integration
+- Pre-extracted schema tables — cross-validated rule patterns, mode descriptions, tool specifier formats
+- Settings documentation — settings file locations and merge behavior, where permission rules are defined, scope precedence
 
-Read the actual files. Do not rely on training knowledge for rule syntax, pattern matching behavior, path resolution, or mode semantics. The files above contain the current, verified Anthropic documentation.
+The Quick Reference section above contains the critical schemas for most tasks. Consult the full documentation only when the Quick Reference does not cover your specific question.
+
+Read the actual documentation files. Do not rely on training knowledge for rule syntax, pattern matching behavior, path resolution, or mode semantics.

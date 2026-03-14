@@ -61,18 +61,19 @@ Before resolving decisions, **read the authoritative docs** for the detected typ
 
 | Type | Status | Reference Files to Read |
 |------|--------|------------------------|
-| **skill** | READY | `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/skills.md`, `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/best-practices.md` |
-| **hook** | READY | `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/hooks.md`, `/Users/cpconnor/Desktop/Claude Code Research/processed/Session_8_Schemas.md` |
-| **settings** | READY | `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/settings.md`, `/Users/cpconnor/Desktop/Claude Code Research/processed/Session_8_Schemas.md` |
-| **plugin** | PLANNED | Use training knowledge + warn: "Plugin docs not yet indexed — output may need manual review" |
-| **mcp** | PLANNED | Use training knowledge + warn: "MCP docs not yet indexed — output may need manual review" |
-| **cicd** | PLANNED | Use training knowledge + warn: "CI/CD docs not yet indexed — output may need manual review" |
-| **output-style** | READY | Same as **skill** (output styles are skills with specific content) |
-| **subagent** | PLANNED | Use training knowledge + warn: "Subagent docs not yet indexed — output may need manual review" |
+| **skill** | READY | Official Claude Code skills documentation and best practices, or use the `cc-ref-skills` reference skill if loaded in your context |
+| **hook** | READY | Official Claude Code hooks documentation and hook schemas, or use the `cc-ref-hooks` reference skill if loaded in your context |
+| **settings** | READY | Official Claude Code settings documentation and settings schemas, or use the `cc-ref-settings` reference skill if loaded in your context |
+| **plugin** | READY | Official Claude Code plugins documentation, or use the `cc-ref-plugins` reference skill if loaded in your context |
+| **mcp** | READY | Official Claude Code MCP documentation, or use the `cc-ref-mcp` reference skill if loaded in your context |
+| **cicd** | READY | Official Claude Code GitHub Actions and GitLab CI/CD documentation, or use the `cc-ref-cicd` reference skill if loaded in your context |
+| **output-style** | READY | Official Claude Code output styles documentation, or use the `cc-ref-output-styles` reference skill if loaded in your context |
+| **subagent** | READY | Official Claude Code subagent documentation, or use the `cc-ref-subagents` reference skill if loaded in your context |
 
-For READY types: read the files, then proceed to resolution.
-For PLANNED types: proceed with best-effort resolution and include a warning comment
-in the generated output: `<!-- Generated without indexed docs — verify against current documentation -->`.
+For all types: load the reference documentation or reference skill, then proceed to resolution.
+If a reference skill is not available and official docs cannot be found, proceed with
+best-effort resolution using training knowledge and include a warning comment in the
+generated output: `<!-- Generated without indexed docs — verify against current documentation -->`.
 
 ---
 
@@ -224,9 +225,9 @@ Provide:
 
 ## 6. Graceful Degradation
 
-### PLANNED Types
-When generating for a PLANNED type (plugin, MCP, CI/CD, subagent):
-1. Announce: "This type's reference docs aren't indexed yet — I'll use my training knowledge."
+### Missing Reference Docs
+When generating without access to reference documentation:
+1. Announce: "Reference docs aren't available — I'll use my training knowledge."
 2. Add a comment to generated files: `<!-- Generated without indexed docs — verify against current documentation -->`
 3. Include a "Verify" section in the summary listing what to double-check.
 

@@ -100,10 +100,12 @@ Evaluation order: **deny → ask → allow** (first match wins).
 
 ## Authoritative Sources
 
-When you need complete documentation for settings, read these files:
+When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for settings. Key pages to consult:
 
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/settings.md` — Complete settings documentation (59KB): all configuration keys, scope behavior, managed settings, enterprise lockdown
-- `/Users/cpconnor/Desktop/Claude Code Research/processed/Session_8_Schemas.md` — Pre-extracted settings tables (64KB): complete annotated JSON, all environment variables, permission rule syntax with examples, sandbox configuration, tool permission summary
-- `/Users/cpconnor/projects/claude-code/examples/settings/` — Example settings files (strict, lax, bash-sandbox configurations)
+- Settings documentation — all configuration keys, scope behavior, managed settings, enterprise lockdown
+- Pre-extracted schema tables — complete annotated JSON, all environment variables, permission rule syntax with examples, sandbox configuration, tool permission summary
+- Example settings files — strict, lax, and bash-sandbox configurations
 
-Read the actual files. Do not rely on training knowledge for settings keys, accepted values, scope behavior, merge rules, or permission syntax. The files above contain the current, verified Anthropic documentation.
+The Quick Reference section above contains the critical schemas for most tasks. Consult the full documentation only when the Quick Reference does not cover your specific question.
+
+Read the actual documentation files. Do not rely on training knowledge for settings keys, accepted values, scope behavior, merge rules, or permission syntax.

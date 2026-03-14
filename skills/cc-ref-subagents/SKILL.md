@@ -123,9 +123,11 @@ claude --agents '{
 
 ## Authoritative Sources
 
-When you need complete documentation for subagents, read these files:
+When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for subagents. Key pages to consult:
 
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/sub-agents.md` — Complete subagent documentation (39KB): built-in agents, creation, all frontmatter fields, tool control, MCP scoping, hooks, memory, examples
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/agent-teams.md` — Agent teams documentation (24KB): multi-agent coordination, team configuration, communication patterns
+- Subagents documentation — built-in agents, creation, all frontmatter fields, tool control, MCP scoping, hooks, memory, examples
+- Agent teams documentation — multi-agent coordination, team configuration, communication patterns
 
-Read the actual files. Do not rely on training knowledge for frontmatter fields, tool names, model options, or nesting constraints. The files above contain the current, verified Anthropic documentation.
+The Quick Reference section above contains the critical schemas for most tasks. Consult the full documentation only when the Quick Reference does not cover your specific question.
+
+Read the actual documentation files. Do not rely on training knowledge for frontmatter fields, tool names, model options, or nesting constraints.

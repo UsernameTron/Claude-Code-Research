@@ -24,8 +24,8 @@ plugin directory with manifest, components, and configuration.
 1. **INVENTORY** — Identify what components to include (skills, agents, hooks,
    MCP servers, LSP servers, output styles). Announce: "I'll package a plugin
    named **[name]** with [N] components."
-2. **LOAD** — Read the authoritative reference:
-   `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugins-reference.md`
+2. **LOAD** — Read the official Claude Code documentation for plugins, or
+   use the `cc-ref-plugins` reference skill if loaded in your context.
 3. **RESOLVE** — Make all technical decisions using the Resolution Engine below.
    Present resolved decisions to the user before writing.
 4. **OUTPUT** — Write the complete plugin directory. Provide file tree, testing

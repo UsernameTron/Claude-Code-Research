@@ -120,11 +120,13 @@ claude --plugin-dir ./my-plugin   # Test locally
 
 ## Authoritative Sources
 
-When you need complete documentation for plugins, read these files:
+When you need complete documentation beyond the Quick Reference above, read the official Claude Code documentation for plugins. Key pages to consult:
 
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugins.md` — Plugin creation guide (17KB): quickstart, component types, development workflow, testing, conversion from standalone
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugins-reference.md` — Complete technical reference (26KB): manifest schema, all component specs, path behavior rules, environment variables, LSP servers
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/plugin-marketplaces.md` — Marketplace distribution (34KB): publishing, versioning, update mechanisms, marketplace configuration
-- `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/discover-plugins.md` — Plugin discovery and installation (19KB): install commands, scope flags, browsing, enabling/disabling
+- Plugin creation guide — quickstart, component types, development workflow, testing, conversion from standalone
+- Plugin technical reference — manifest schema, all component specs, path behavior rules, environment variables, LSP servers
+- Plugin marketplaces documentation — publishing, versioning, update mechanisms, marketplace configuration
+- Plugin discovery and installation — install commands, scope flags, browsing, enabling/disabling
 
-Read the actual files. Do not rely on training knowledge for manifest fields, component paths, namespacing rules, or installation behavior. The files above contain the current, verified Anthropic documentation.
+The Quick Reference section above contains the critical schemas for most tasks. Consult the full documentation only when the Quick Reference does not cover your specific question.
+
+Read the actual documentation files. Do not rely on training knowledge for manifest fields, component paths, namespacing rules, or installation behavior.

@@ -24,8 +24,8 @@ config for the appropriate scope.
 1. **CLASSIFY** — Identify what the user wants to configure (permissions, model,
    sandbox, hooks, etc.). Announce what you'll create.
 2. **LOAD** — Read the cc-ref-settings reference skill (already in context).
-   For edge cases, read:
-   `/Users/cpconnor/Desktop/Claude Code Research/fetched_docs/settings.md`
+   For edge cases, read the official Claude Code documentation for settings,
+   or use the `cc-ref-settings` reference skill if loaded in your context.
 3. **RESOLVE** — Make all decisions using the Resolution Engine below.
    Present resolved config to the user before writing.
 4. **OUTPUT** — Write or merge the settings file. Show diff if merging.
