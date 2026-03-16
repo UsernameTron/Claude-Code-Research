@@ -79,7 +79,21 @@ Invoke `extension-auditor`. Pass the user's full message as context.
 **For UPGRADE routes:**
 Invoke `upgrade-scanner`. Pass the user's full message as context.
 
-**For PACKAGE and CREATE routes:**
+**For CREATE routes:**
+1. First, invoke the `smart-scaffold` skill for tier classification. Pass the
+   user's full message. The scaffold returns a complexity tier (1, 2, or 3)
+   with a downstream route and upgrade path message.
+2. Route based on tier:
+   - **Tier 1** → invoke `extension-concierge` with directive:
+     "SIMPLE PATH ONLY. Include upgrade path: [scaffold's message]"
+   - **Tier 2** → invoke `extension-concierge` with the request.
+     Let it use combo/coordinated generation.
+   - **Tier 3** → invoke `extension-concierge` with directive:
+     "COMPLEX PATH. Full system generation."
+3. If smart-scaffold is unavailable, invoke `extension-concierge` directly
+   (existing behavior).
+
+**For PACKAGE routes:**
 Invoke `extension-concierge`. Pass the user's full message as context.
 
 ---
