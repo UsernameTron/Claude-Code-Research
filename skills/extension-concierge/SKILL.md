@@ -161,6 +161,12 @@ For simple (single-file) requests, invoke the appropriate generator skill:
 | output-style | `output-style-creator` |
 | subagent | `cc-factory` (subagent generation mode) |
 
+**Subagent complexity check**: If the subagent request involves coordination with
+other components (part of a combo or Tier 3 system), requires specialized domain
+knowledge (multiple preloaded skills), or the user explicitly asks for a
+"production-ready" or "full" agent — route to `subagent-generator` agent instead
+of cc-factory.
+
 **Execution:**
 1. Load the reference skill (Section 1C) for schema accuracy.
 2. Present your resolved decisions to the user in 2-3 lines.
@@ -193,6 +199,12 @@ compound intent with 2-4 components):
 1. Invoke `hook-engineer` subagent — designs the multi-event hook architecture.
 2. Invoke `extension-validator` subagent — validates hook configs and scripts.
 3. If validator finds issues, fix them automatically.
+4. Present results.
+
+### Complex Subagent
+1. Invoke `subagent-generator` agent — runs three-part gate, designs full agent with all standard sections.
+2. Invoke `extension-validator` subagent — validates the generated agent file.
+3. If validator finds issues, subagent-generator is re-dispatched to fix them.
 4. Present results.
 
 ### Multi-Type Request (no combo pattern match)
