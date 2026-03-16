@@ -358,12 +358,46 @@ After both stages pass:
 
 ### 5E. Guard Rails
 
-- **Max 3 iterations** per review stage. After 3 failures, escalate to user with
-  the specific issues and let them decide.
+- **Max 3 iterations** per review stage. Failure counters are separate per stage.
 - **Never skip Stage 1** to get to Stage 2 faster. Spec compliance always comes first.
-- **Never deliver output that failed either stage** without user acknowledgment.
 - **Builder fixes, not the validator.** The validator identifies issues; the builder
   agent is re-dispatched to fix them. The validator never modifies files.
+- **Cross-stage rule**: If spec compliance passes but schema quality fails 3 times,
+  do NOT restart spec compliance. Only the failing stage retries.
+
+### 5F. Circuit Breaker
+
+When a stage exhausts its 3 iterations without passing, present the user with:
+
+```
+Review loop: [Stage 1: Spec Compliance | Stage 2: Schema Quality] failed after 3 attempts.
+
+Issues remaining:
+- [issue 1 from validator's most recent report]
+- [issue 2]
+
+Options:
+1. Proceed with warnings — I'll deliver the output with these known issues noted in a WARNINGS block
+2. Try a different approach — I'll re-plan the generation strategy and try again
+3. Stop — I'll show you what we have so far, and you decide what to do
+```
+
+**Option 1: Proceed with warnings**
+- Deliver output with a prominent `WARNINGS` block at the top listing all unresolved issues
+- Mark the review summary as: "PASS_WITH_OVERRIDES (user accepted N issues)"
+- Do NOT suppress the warnings in any way
+
+**Option 2: Try a different approach**
+- Re-invoke the original generator with a modified prompt:
+  "Previous generation failed validation 3 times on: [specific issues].
+   Take a different approach to avoid these issues."
+- Reset the iteration counter for this stage
+- If this second attempt also exhausts 3 iterations, present circuit breaker again
+  (but only once — third time, force Option 1 or 3)
+
+**Option 3: Stop**
+- Show the current output as-is with all validator findings
+- Let the user decide whether to edit manually or rephrase the request
 
 ---
 
