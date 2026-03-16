@@ -171,7 +171,17 @@ For simple (single-file) requests, invoke the appropriate generator skill:
 
 ## 3. Complex Path — Chain Subagents
 
-For complex (multi-file) requests, chain the Phase 4 subagents:
+For complex (multi-file) requests, route by tier:
+
+### Tier 2 — Combo Engine (2-4 coordinated extensions)
+When smart-scaffold classifies a request as Tier 2 (or the inference engine detects
+compound intent with 2-4 components):
+1. Route to `extension-combo-engine` skill.
+2. Combo engine matches against its registry or constructs a custom combo.
+3. Combo engine generates all components with wiring between them.
+4. Combo engine presents a blueprint (replaces standard output format for combos).
+5. Run `extension-validator` subagent on all generated files.
+6. Apply teaching annotations (Section 4A) at per-component brief level.
 
 ### Plugin Creation
 1. Invoke `plugin-builder` subagent — designs architecture, creates all files.
@@ -185,8 +195,8 @@ For complex (multi-file) requests, chain the Phase 4 subagents:
 3. If validator finds issues, fix them automatically.
 4. Present results.
 
-### Multi-Type Request
-If the request spans multiple extension types (e.g., "skill + hook + settings"):
+### Multi-Type Request (no combo pattern match)
+If the request spans multiple extension types but doesn't match a combo pattern:
 1. Resolve each type sequentially using the inference engine.
 2. Generate each via the simple path.
 3. Run `extension-validator` subagent on all outputs.
