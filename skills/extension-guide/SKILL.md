@@ -32,8 +32,8 @@ Evaluate the user's request against these intents in priority order. First match
 
 | Priority | Intent | Route To | Signal Phrases |
 |----------|--------|----------|----------------|
-| 1 | **DIAGNOSE** a broken config | `extension-auditor` skill | "isn't working", "not triggering", "broken", "wrong", "error in my hook/skill/settings", "why doesn't this work" |
-| 2 | **AUDIT** existing configs | `extension-auditor` skill | "check my config", "validate", "is this correct", "review my hooks/skills/settings", "audit" |
+| 1 | **FIX** a broken extension | `extension-fixer` skill | "isn't working", "not triggering", "broken", "fix my", "why doesn't", "hook doesn't fire", "skill won't trigger", "permission not applying", "not working", "something's wrong with", "help me fix", "error in my" |
+| 1.5 | **AUDIT** all extensions | `extension-auditor` skill | "audit", "check all my configs", "validate everything", "full scan", "health check", "review all my", "check my config", "validate", "is this correct" |
 | 3 | **UPGRADE** existing configs | `upgrade-scanner` skill | "what's new", "deprecated", "scan for improvements", "am I using old patterns", "upgrade" |
 | 3.5 | **EXPLAIN** current setup | `setup-explainer` skill | "what do I have", "explain my setup", "show my extensions", "what's installed", "what hooks do I have", "what's configured", "list my skills", "what does my environment do", "show me everything", "what did I set up" |
 | 4 | **PACKAGE** into a plugin | `extension-concierge` skill | "package", "bundle", "make a plugin from", "distribute", "marketplace" |
@@ -74,7 +74,11 @@ When you identify the route, **invoke the target skill immediately** using the
 Skill tool. Do not announce the routing. Do not say "I'll use the extension-concierge
 skill" or "Let me load the auditor." Just do it.
 
-**For DIAGNOSE and AUDIT routes:**
+**For FIX routes:**
+Invoke `extension-fixer`. Pass the user's full message as context.
+If the user mentioned a specific file path or extension name, include it.
+
+**For AUDIT routes:**
 Invoke `extension-auditor`. Pass the user's full message as context.
 
 **For UPGRADE routes:**
@@ -129,8 +133,8 @@ knowledge. Do not mention that you loaded a reference.
 
 ## 4. Frustration Signals
 
-These indicate a configuration problem, not a creation request. Always route to
-`extension-auditor` regardless of the literal words:
+These indicate a specific broken extension, not a creation request. Always route to
+`extension-fixer` regardless of the literal words:
 
 - "This hook isn't working"
 - "My settings are wrong"
