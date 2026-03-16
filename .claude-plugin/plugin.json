@@ -1,7 +1,7 @@
 {
   "name": "claude-code-factory",
-  "version": "2.1.0",
-  "description": "Intent-first Claude Code extension autopilot with complete lifecycle: generate, install, explain, and fix. Features 40 pre-built recipes, 12 combo patterns, teaching annotations, three-part agent necessity gate, two-stage review loop with circuit breaker, and production-ready subagent generation.",
+  "version": "2.2.0",
+  "description": "Intent-first Claude Code extension autopilot with complete lifecycle: generate, install, explain, fix, and recommend. Features 43 recipes, 12 combo patterns, 7 specialist agents, Tier 3 system architecture with blueprint-first design, parallel phased generation, multi-component validation, and proactive setup recommendations.",
   "author": {
     "name": "Pete Connor"
   },
