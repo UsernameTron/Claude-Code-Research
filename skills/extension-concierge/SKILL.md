@@ -207,6 +207,15 @@ compound intent with 2-4 components):
 3. If validator finds issues, subagent-generator is re-dispatched to fix them.
 4. Present results.
 
+### Tier 3 — System Architect (5+ coordinated extensions)
+When smart-scaffold classifies as Tier 3 (or combo engine escalates a 5+ component request):
+1. Invoke `system-architect` subagent with the full request and any resolved context from the intent engine.
+2. The architect produces a blueprint. Present it to the user for approval.
+3. On approval, the architect coordinates generation across phases — dispatching to appropriate generators/agents per component.
+4. After all phases complete, run `extension-validator` on all generated files as a batch.
+5. Apply teaching annotations (Section 4A) at architecture-overview level.
+6. Present results with the unified installation guide from the architect.
+
 ### Multi-Type Request (no combo pattern match)
 If the request spans multiple extension types but doesn't match a combo pattern:
 1. Resolve each type sequentially using the inference engine.
