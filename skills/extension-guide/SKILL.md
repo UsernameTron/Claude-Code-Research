@@ -36,11 +36,34 @@ Evaluate the user's request against these intents in priority order. First match
 | 2 | **AUDIT** existing configs | `extension-auditor` skill | "check my config", "validate", "is this correct", "review my hooks/skills/settings", "audit" |
 | 3 | **UPGRADE** existing configs | `upgrade-scanner` skill | "what's new", "deprecated", "scan for improvements", "am I using old patterns", "upgrade" |
 | 4 | **PACKAGE** into a plugin | `extension-concierge` skill | "package", "bundle", "make a plugin from", "distribute", "marketplace" |
-| 5 | **CREATE** a new extension | `extension-concierge` skill | "create", "build", "write", "set up", "generate", "I need a", "make me a", "add a" |
+| 5 | **CREATE** a new extension | `extension-concierge` skill | "create", "build", "write", "set up", "generate", "I need a", "make me a", "add a", "I want Claude to", "I want to", "make it so", "can Claude", "how do I make Claude", "I wish Claude would", "is there a way to", "help me set up", "I need Claude to", "configure Claude to", "teach Claude to", "every time I", "before I", "after I" |
 
 **Ambiguity rule:** If intent is unclear after reading the full message, ask ONE
 clarifying question: "Are you looking to create something new or fix something
 existing?" Then route based on the answer.
+
+---
+
+## 1.5 Behavioral Intent Detection
+
+Many CREATE requests don't use creation verbs. Users describe desired BEHAVIOR:
+
+| Behavioral Pattern | Example |
+|--------------------|---------|
+| "I want [Claude] to [verb]..." | "I want Claude to lint my code after edits" |
+| "Make [Claude] [verb]..." | "Make Claude check for errors automatically" |
+| "[Claude] should [verb/know]..." | "Claude should know our style guide" |
+| "Can [Claude] [verb]..." | "Can Claude format on save?" |
+| "Is there a way to [verb]..." | "Is there a way to block bad commits?" |
+| "How do I make [Claude] [verb]..." | "How do I make Claude review PRs?" |
+| "Every time I [verb], I want..." | "Every time I commit, I want a review" |
+| "Before/After [action], [verb]..." | "After every edit, run the linter" |
+| "I wish [Claude] would..." | "I wish Claude would catch type errors" |
+
+These are CREATE requests. Route to `extension-concierge`. The concierge's
+intent engine will determine the correct extension type — do NOT attempt
+to classify the type here. Your job is routing (CREATE vs DIAGNOSE vs AUDIT),
+not type classification.
 
 ---
 
