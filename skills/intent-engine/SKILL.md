@@ -64,11 +64,23 @@ If Cap 2 not built yet → skip this stage entirely.
 Walk the decision tree in Section 3. Extract signals from the user's message.
 Determine type and confidence level.
 
-### Stage 3: Disambiguation
+### Stage 3: Clarification (via Smart Scaffold)
+
+When classification confidence is MEDIUM or LOW, delegate ALL clarification
+to the smart-scaffold skill. Do NOT ask your own clarifying questions.
+
 - **HIGH confidence** → present plan, ask "Does this sound right?"
-- **MEDIUM** → ask ONE question from the disambiguation protocol (Section 5)
-- **LOW** → ask up to TWO questions, then default to skill if still unclear
+- **MEDIUM or LOW** → pass partial classification to smart-scaffold:
+  1. Smart-scaffold identifies which fields are unknown
+  2. It asks 1-3 developer-language questions (never Claude Code jargon)
+  3. It classifies the complexity tier (Tier 1/2/3)
+  4. It returns a fully-resolved spec with tier, type, and all fields
+  5. Continue to Stage 4 (Resolution) with the completed spec
 - **COMPOUND** → note both types, generate primary first
+
+The smart-scaffold replaces the inline disambiguation protocol (Section 5)
+for MEDIUM/LOW confidence cases. Section 5 remains as a fallback reference
+if smart-scaffold is unavailable.
 
 ### Stage 4: Resolution & Handoff
 Package classification results into structured context (Section 7).
