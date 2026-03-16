@@ -36,6 +36,7 @@ Evaluate the user's request against these intents in priority order. First match
 | 1.5 | **AUDIT** all extensions | `extension-auditor` skill | "audit", "check all my configs", "validate everything", "full scan", "health check", "review all my", "check my config", "validate", "is this correct" |
 | 3 | **UPGRADE** existing configs | `upgrade-scanner` skill | "what's new", "deprecated", "scan for improvements", "am I using old patterns", "upgrade" |
 | 3.5 | **EXPLAIN** current setup | `setup-explainer` skill | "what do I have", "explain my setup", "show my extensions", "what's installed", "what hooks do I have", "what's configured", "list my skills", "what does my environment do", "show me everything", "what did I set up" |
+| 3.7 | **RECOMMEND** extensions to add | `recommendation-engine` agent | "what should I add", "what am I missing", "recommend", "improve my setup", "suggestions for my setup", "what's next for my environment", "what extensions should I have", "help me improve my config" |
 | 4 | **PACKAGE** into a plugin | `extension-concierge` skill | "package", "bundle", "make a plugin from", "distribute", "marketplace" |
 | 5 | **CREATE** a new extension | `extension-concierge` skill | "create", "build", "write", "set up", "generate", "I need a", "make me a", "add a", "I want Claude to", "I want to", "make it so", "can Claude", "how do I make Claude", "I wish Claude would", "is there a way to", "help me set up", "I need Claude to", "configure Claude to", "teach Claude to", "every time I", "before I", "after I" |
 
@@ -105,6 +106,11 @@ If the user mentioned a specific scope (e.g., "in this project", "everywhere",
 - "in this project" / "here" / "project" → pass `project`
 - "everywhere" / "global" / "all my projects" → pass `global`
 - No scope mentioned → pass no argument (scans all)
+
+**For RECOMMEND routes:**
+Invoke `recommendation-engine` agent. Pass the user's full message as context.
+If setup-explainer was already run in this session, mention it so the
+recommendation engine can skip re-scanning.
 
 **For PACKAGE routes:**
 Invoke `extension-concierge`. Pass the user's full message as context.
