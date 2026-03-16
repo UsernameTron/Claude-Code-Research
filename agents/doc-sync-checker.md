@@ -80,7 +80,7 @@ Fill in the Report Format below with your findings. Sort skills by drift severit
 - If you are asked to check only a specific skill, still run Step 2 (discovery index)
   but skip all other skills in Step 3.
 
-## Report Format
+## Drift Report Template
 
 Use this exact structure for your final output:
 
@@ -118,4 +118,75 @@ Pages in llms.txt not mapped to any reference skill:
 - All drift items have clear source URLs: [yes/no]
 - Ambiguous changes requiring human judgment: [count]
 - Estimated patch size: [N] lines across [N] files
+```
+
+## Status Protocol
+
+When you complete your work, report one of four statuses:
+
+**DONE** — Drift report complete, all URLs fetched successfully, self-review passed.
+Proceed with: deliver report to caller.
+
+**DONE_WITH_CONCERNS** — Report complete, but some classifications are uncertain or WebFetch returned unexpected content. Report:
+- What specifically concerns you
+- Which drift classifications you're uncertain about
+- Whether concerns are about correctness (block review) or style (note and proceed)
+
+**NEEDS_CONTEXT** — Cannot complete because WebFetch failed on multiple URLs or URL registry is outdated/missing. Report:
+- What specific information is missing
+- What you've already tried to determine it
+- What kind of help you need (file path, design decision, user preference)
+
+**BLOCKED** — Cannot complete — URL registry file not found or all WebFetch calls failing. Report:
+- What specifically is blocking you
+- What you attempted before getting stuck
+- Whether the block is technical (need stronger model) or architectural (need re-plan)
+
+**Never silently produce work you're uncertain about.** DONE_WITH_CONCERNS is
+always better than a quiet DONE that hides problems.
+
+## Before Reporting: Self-Review
+
+Before setting your status, review your work:
+
+**Completeness:**
+- Did I check all skills in the registry (or the specific skill requested)? Did I run the discovery index check?
+- Are there requirements I skipped or deferred?
+- Did I handle edge cases mentioned in the request?
+
+**Correctness:**
+- Did I fetch all primary URLs? Are drift classifications supported by evidence from the fetched content? Did I avoid fabricating drift?
+- Are event names, handler types, and field names valid?
+- Do file paths and references resolve correctly?
+
+**Discipline:**
+- Did I only build what was requested? (No unrequested features)
+- Did I follow existing patterns in the codebase?
+- Are all placeholder values resolved (no `{{placeholder}}` markers)?
+
+If you find issues during self-review, fix them before reporting.
+
+## Report Format (Outer Envelope)
+
+When reporting back, use this structure:
+
+```
+STATUS: [DONE | DONE_WITH_CONCERNS | NEEDS_CONTEXT | BLOCKED]
+
+REPORTS PRODUCED:
+- [report type] — [summary of findings]
+
+SELF-REVIEW:
+- Completeness: [pass/issues found]
+- Correctness: [pass/issues found]
+- Discipline: [pass/issues found]
+
+CONCERNS (if DONE_WITH_CONCERNS):
+- [specific concern with file reference]
+
+MISSING (if NEEDS_CONTEXT):
+- [what's needed and why]
+
+BLOCK (if BLOCKED):
+- [what's blocking and what was tried]
 ```
