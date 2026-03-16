@@ -143,8 +143,12 @@ After presenting the summary, the user might:
   or JSON key to remove). Do NOT remove without confirmation.
 - **"Add [capability]"** → Hand off to the intent engine or directly to the
   appropriate generator
-- **"What should I add?"** → Expand the observations section with more
-  suggestions tailored to their current setup
+- **"What should I add?" / "What am I missing?" / "Any recommendations?"** →
+  Hand off to the `recommendation-engine` agent for comprehensive analysis.
+  Pass the current environment inventory as context so it doesn't need to
+  re-scan. The recommendation engine cross-references your setup against all
+  40 recipes, upgrade opportunities, and gap analysis to produce ranked
+  suggestions.
 - **"Run a health check"** → Suggest running `/extension-auditor` for
   validation
 
