@@ -9,5 +9,10 @@ state/
 plans/
 outputs/
 
+# Scout tooling (research artifacts, not part of the plugin)
+scout-agentskill.py
+agentskill-scout-report.md
+downloads/
+
 # macOS
 .DS_Store
