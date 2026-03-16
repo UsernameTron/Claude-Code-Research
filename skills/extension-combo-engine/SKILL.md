@@ -66,7 +66,7 @@ Before generating, validate the combo makes sense:
 |------------|---------------|--------|
 | 1 | Not a combo | Return to concierge for single-generator path |
 | 2-4 | Valid combo | Proceed with generation |
-| 5+ | System-level | Escalate to Tier 3 (plugin-builder or architect) |
+| 5+ | System-level | Escalate to Tier 3 (`system-architect` agent) |
 
 ---
 
@@ -96,7 +96,7 @@ For each component, invoke the appropriate generator:
 | Hook | `hook-factory` |
 | Skill | `skill-factory` |
 | Reference skill | `skill-factory` (with `user-invocable: false`) |
-| Subagent | `cc-factory` (subagent mode) |
+| Subagent | `subagent-generator` agent |
 | Permission rules | `settings-architect` |
 | MCP config | `mcp-configurator` |
 | Settings | `settings-architect` |
