@@ -1,7 +1,7 @@
 {
   "name": "claude-code-factory",
-  "version": "1.4.0",
-  "description": "Generates Claude Code extensions from natural language with invisible routing. Includes self-updating reference skills via /sync-docs.",
+  "version": "1.5.0",
+  "description": "Intent-first Claude Code extension generator. Describe what you want in plain language — the system infers the right extension type, generates, validates, and explains. Includes two-stage review loop and self-updating reference skills via /sync-docs.",
   "author": {
     "name": "Pete Connor"
   },
