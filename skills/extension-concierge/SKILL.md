@@ -12,6 +12,8 @@ description: |
 user-invocable: true
 argument-hint: "<describe the Claude Code extension you want to create>"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
+skills:
+  - intent-engine
 ---
 
 # Extension Concierge — Orchestrator (Layer 1)
@@ -30,21 +32,44 @@ English. You figure out the type, the technical details, and the output format.
 
 For every request, determine these four things before generating anything:
 
-### A. Extension Type
+### A. Extension Type (Intent Classification)
 
-| Type | Detection Signals |
-|------|-------------------|
-| **hook** | "hook", "block", "validate before", "prevent", "auto-format", "lint on save", "before/after tool", event names (PreToolUse, PostToolUse, Stop, etc.) |
-| **plugin** | "plugin", "package", "bundle skills", "distribute", "marketplace" |
-| **mcp** | "MCP", "connect to", "integrate with", "OAuth", "external service", service names (GitHub, Slack, Notion, Sentry) |
-| **cicd** | "CI/CD", "GitHub Actions", "pipeline", "PR review", "deploy with Claude", "GitLab CI" |
-| **settings** | "settings", "configure", "lock model", "sandbox", "permissions", "allow/deny" |
-| **subagent** | "subagent", "agent that", "specialist", "delegate to", "autonomous agent" |
-| **output-style** | "output style", "writing style", "tone", "format responses as", "executive briefing" |
-| **skill** | Catch-all: any "create/build/make a [thing] that [does X]" not matching above |
+Determine extension type by running the intent-engine classification pipeline:
 
-If type is ambiguous, ask ONE question: "Should this be a [A] or a [B]?" with a
-one-sentence explanation of the difference.
+**Step 1 — Expert bypass.** If the user names a specific extension type or
+uses Claude Code vocabulary (PreToolUse, frontmatter, plugin.json, etc.),
+take them at their word. Record the type and skip to Section 1B.
+
+**Step 2 — Scenario match.** If the scenario library (Cap 2) is available,
+compare the request. High-confidence match (≥ 0.85) → use scenario's type
+and pre-resolved config. Skip to Section 1B.
+
+**Step 3 — Walk the decision tree.** Use the intent-engine's behavioral
+decision tree to classify. The tree's primary question is "When does this
+happen?" — it branches into automatic (hooks), on-demand (skills), knowledge
+(reference skills), integration (MCP), restriction (permissions), distribution
+(plugins), CI/CD, and output style.
+
+**Step 4 — Disambiguate if needed.** If the tree doesn't reach a clear leaf:
+- Ask ONE plain-English question from the disambiguation protocol
+- NEVER ask "do you want a hook or a skill?"
+- Max 2 questions total
+
+**Step 5 — Check for compounds.** If the tree indicates multiple branches
+match simultaneously, this is a compound intent. Note primary and secondary
+types. Route to combo engine (Cap 5) if available, or generate sequentially.
+
+**Step 6 — Present plan.** Compose a one-sentence summary: "I'll create a
+[type] that [does what you described]." Show key decisions. Ask: "Does this
+sound right?" On confirmation, continue to Section 1B.
+
+The intent-engine handles WHAT (which extension type + event resolution).
+Sections 1B-1D handle HOW (complexity, reference docs, remaining technical decisions).
+
+**Fallback:** When invoked directly (without intent-engine pre-classification),
+determine type from explicit keywords in the request: "hook" → hook, "plugin"
+→ plugin, "MCP" → MCP, "CI/CD" → cicd, "settings" → settings, "subagent" →
+subagent, "output style" → output-style, default → skill.
 
 ### B. Complexity
 
@@ -58,6 +83,12 @@ Complex triggers:
 - "Coaching enforcement system with hooks on 3 events" (hook-engineer subagent)
 - "Complete CI/CD pipeline with PR review and auto-merge" (multiple generators)
 - "Full plugin with skills, hooks, and MCP server" (plugin-builder subagent)
+
+**Compound intents:** If the intent engine detected compound intent (two
+extension types needed), treat as Complex regardless of other criteria.
+Generate the primary type first, then the secondary type. If Cap 5
+(Extension Combos) is available, route to the combo engine for coordinated
+generation.
 
 ### C. Reference Docs Needed
 
@@ -178,6 +209,11 @@ Created a [extension type] for [purpose]:
 
   Decisions made:
   - [key choice]: [value] — [why]
+
+  Why this type: [one sentence — e.g., "This is a hook because you wanted
+  it to happen automatically after every edit."]
+  Signals: [behavioral signals that drove classification — e.g.,
+  "Detected: 'automatically' + 'after every edit' → PostToolUse hook"]
 
   To test: [specific command or action]
   To use: [specific instruction]
