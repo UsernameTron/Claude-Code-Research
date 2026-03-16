@@ -197,7 +197,69 @@ Generated [type] configuration:
 
 ---
 
-## 5. Error Handling
+## 5. Review Loop Protocol
+
+After any builder agent (hook-engineer, plugin-builder, or generator skill) produces
+output, execute this review loop before delivering to the user.
+
+### 5A. Handle Builder Status
+
+| Status | Action |
+|--------|--------|
+| **DONE** | Proceed to Stage 1 review |
+| **DONE_WITH_CONCERNS** | Read concerns. If correctness-related, address before review. If observational, note and proceed to Stage 1. |
+| **NEEDS_CONTEXT** | Provide the missing context from the original request or project files. Re-dispatch builder. |
+| **BLOCKED** | Assess: context problem → provide context, re-dispatch. Complexity problem → re-dispatch with stronger model. Plan problem → escalate to user. |
+
+### 5B. Stage 1 — Spec Compliance Review
+
+Dispatch extension-validator in Spec Compliance mode:
+- Provide: original user request, builder's self-report, output file paths
+- Expected: SPEC_PASS or SPEC_FAIL with specific issues
+
+If SPEC_FAIL:
+1. Send failure details to the original builder agent
+2. Builder fixes the specific issues
+3. Re-dispatch spec review
+4. Max 3 fix iterations. If still failing after 3, present issues to user.
+
+### 5C. Stage 2 — Schema Quality Review
+
+After SPEC_PASS, dispatch extension-validator in Schema Quality mode:
+- Provide: output file paths only (validator reads files directly)
+- Expected: QUALITY_PASS, QUALITY_WARN, or QUALITY_FAIL
+
+If QUALITY_FAIL:
+1. Send failure details to the original builder agent
+2. Builder fixes schema issues
+3. Re-dispatch quality review
+4. Max 3 fix iterations.
+
+If QUALITY_WARN:
+- Include warnings in the output delivered to user
+- Do not block delivery for warnings
+
+### 5D. Delivery
+
+After both stages pass:
+1. Deliver the output to the user with the standard Output Format (Section 4)
+2. Append a Review Summary:
+   - Spec compliance: PASS (iteration count if > 1)
+   - Schema quality: PASS / PASS with N warnings
+   - Issues caught and fixed during review (if any)
+
+### 5E. Guard Rails
+
+- **Max 3 iterations** per review stage. After 3 failures, escalate to user with
+  the specific issues and let them decide.
+- **Never skip Stage 1** to get to Stage 2 faster. Spec compliance always comes first.
+- **Never deliver output that failed either stage** without user acknowledgment.
+- **Builder fixes, not the validator.** The validator identifies issues; the builder
+  agent is re-dispatched to fix them. The validator never modifies files.
+
+---
+
+## 6. Error Handling
 
 | Condition | Action |
 |-----------|--------|
@@ -210,7 +272,7 @@ Generated [type] configuration:
 
 ---
 
-## 6. Expert Escape Hatch
+## 7. Expert Escape Hatch
 
 If the user mentions schema internals by name (frontmatter fields, event schemas,
 matcher syntax, manifest fields, hookSpecificOutput), they're an expert.
@@ -226,7 +288,7 @@ Acknowledge and offer choice:
 
 ---
 
-## 7. What This Skill Does NOT Do
+## 8. What This Skill Does NOT Do
 
 - **Diagnose broken configs** — that's `extension-auditor` (routed by extension-guide)
 - **Scan for upgrades** — that's `upgrade-scanner` (routed by extension-guide)
