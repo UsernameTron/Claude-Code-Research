@@ -184,15 +184,95 @@ Output styles are skills with a specific structure — resolve using Skill Resol
 
 **Output**: Skill file at `<scope>/skills/<name>/SKILL.md` with tone/format instructions.
 
-### 4.8 Subagent Resolution (PLANNED)
+### 4.8 Subagent Resolution
 
-| Decision | Default |
-|----------|---------|
-| **Name** | Kebab-case, descriptive of function |
-| **Tools** | Minimal set — read-only for analysis, full for code changes |
-| **Model** | `sonnet` for most tasks, `haiku` for fast/simple, `opus` for complex reasoning |
-| **permissionMode** | `default`. Use `plan` for read-only agents. |
-| **Scope** | Project (`.claude/agents/`) unless user says "personal" |
+Before generating a subagent, run the **Three-Part Necessity Gate**. All three
+gates must pass. If any fails, generate a skill instead.
+
+| Gate | Question | Pass Condition |
+|------|----------|----------------|
+| Context Pollution | Does adding this task's context to the main conversation window degrade performance? | Yes — the task generates enough output or reads enough files that it would pollute the main thread |
+| Parallelizability | Can this work run simultaneously with other tasks? | Yes — independent work streams exist that benefit from concurrent execution |
+| Specialization | Does limiting this agent's tools and focus improve outcomes vs. having Claude do it directly? | Yes — a restricted tool set or domain-specific prompt produces better results |
+
+**If ANY gate fails** → output: "This is better suited as a skill. Here's why:
+[gate that failed and explanation]. Generating a skill instead." Then route to
+Section 4.1 (Skill Resolution).
+
+**If ALL gates pass** → proceed with subagent resolution below.
+
+#### Decision Table
+
+| Decision | How to Resolve |
+|----------|---------------|
+| **Name** | Kebab-case, descriptive of function. Extract from request. |
+| **Description** | Must include WHEN to invoke (trigger phrases), not just WHAT. Write as: "[capability]. Use when [triggers]." |
+| **Tools** | Derive from purpose: read-only analysis → `Read, Grep, Glob, Bash`; code changes → `Read, Write, Edit, Bash, Glob, Grep`; web research → add `WebFetch, WebSearch`; orchestration → add `Agent` |
+| **disallowedTools** | Explicit deny list when inheriting all tools. Use for agents that must NOT write or must NOT run bash. |
+| **Model** | `haiku` for fast/simple validation, `sonnet` for most tasks (default), `opus` for complex multi-step reasoning or architect roles |
+| **permissionMode** | `default` (normal). `plan` for read-only agents. `acceptEdits` for trusted code writers. |
+| **maxTurns** | 15 for simple agents, 25 for complex (default), 40 for research/exploration agents |
+| **skills** | Identify which cc-ref-* skills to preload based on domain. Hook-related → cc-ref-hooks. Skill-related → cc-ref-skills. Multi-agent → cc-ref-multi-agent. |
+| **memory** | `project` for project-specific agents (default), `user` for cross-project utilities |
+| **background** | `true` only for long-running tasks that don't need user interaction |
+| **isolation** | `worktree` for agents that make extensive code changes across many files |
+| **Scope** | Project (`.claude/agents/`) unless user says "personal" → (`~/.claude/agents/`) |
+
+#### System Prompt Generation
+
+Every generated agent `.md` file must include these sections in the body (after frontmatter):
+
+1. **Opening paragraph** — Role statement (1-2 sentences). Who is this agent and what it specializes in.
+2. **## When You Are Invoked** — Scope definition. What kinds of tasks trigger this agent, what it does NOT handle, and how it receives context.
+3. **## Workflow** — Numbered steps for how the agent approaches its task. Be specific to the domain.
+4. **## Status Protocol** — The four statuses (DONE, DONE_WITH_CONCERNS, NEEDS_CONTEXT, BLOCKED). Use this exact text:
+
+   **DONE** — Work complete, all output files generated, self-review passed.
+   Proceed with: [appropriate next step for this agent].
+
+   **DONE_WITH_CONCERNS** — Work complete, but you have doubts. Report:
+   - What specifically concerns you
+   - Which files/sections you're uncertain about
+   - Whether concerns are about correctness (block review) or style (note and proceed)
+
+   **NEEDS_CONTEXT** — Cannot complete without information not provided. Report:
+   - What specific information is missing
+   - What you've already tried to determine it
+   - What kind of help you need (file path, design decision, user preference)
+
+   **BLOCKED** — Cannot complete the task. Report:
+   - What specifically is blocking you
+   - What you attempted before getting stuck
+   - Whether the block is technical (need stronger model) or architectural (need re-plan)
+
+   **Never silently produce work you're uncertain about.** DONE_WITH_CONCERNS is
+   always better than a quiet DONE that hides problems.
+
+5. **## Before Reporting: Self-Review** — Three categories:
+   - **Completeness**: Did I produce everything the request specified?
+   - **Correctness**: [Adapt to the agent's domain — e.g., "Does the configuration follow schemas?" for validators, "Are all code changes syntactically valid?" for code writers]
+   - **Discipline**: Did I only build what was requested? No unrequested features?
+
+6. **## Report Format** — The outer envelope:
+   ```
+   STATUS: [DONE | DONE_WITH_CONCERNS | NEEDS_CONTEXT | BLOCKED]
+   FILES PRODUCED:
+   - [path] — [what it contains]
+   SELF-REVIEW:
+   - Completeness: [pass/issues found]
+   - Correctness: [pass/issues found]
+   - Discipline: [pass/issues found]
+   CONCERNS / MISSING / BLOCK: [as applicable]
+   ```
+
+7. **## Constraints** — Guardrails specific to this agent (e.g., "NEVER modify files" for read-only agents, "NEVER run destructive commands" for code writers).
+
+#### Complexity Routing
+
+For complex subagents (specialized domains, multiple preloaded skills, part of a
+Tier 2/3 system), route to the `subagent-generator` agent instead of generating
+inline. Simple subagents (clear purpose, few tools, standalone) can be generated
+by cc-factory directly.
 
 **Output**: Agent markdown file at `<scope>/agents/<name>.md`.
 
