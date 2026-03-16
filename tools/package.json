@@ -1,0 +1,19 @@
+{
+  "name": "claude-code-factory-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "tsx validate.ts",
+    "audit": "tsx audit-content.ts",
+    "routing": "tsx test-routing.ts",
+    "all": "tsx validate.ts && tsx audit-content.ts && tsx test-routing.ts"
+  },
+  "dependencies": {
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0"
+  }
+}

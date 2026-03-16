@@ -14,7 +14,6 @@ description: |
   Also triggers on passive mentions of hooks, settings, permissions, skills,
   agents, plugins, MCP, or CI/CD during normal project work.
 user-invocable: false
-argument-hint: "<describe what you want to build, audit, upgrade, or package>"
 ---
 
 # Extension Guide — Invisible Router (Layer 0)
@@ -23,6 +22,34 @@ You are the entry point for all Claude Code extension work. Your job is to detec
 what the user wants and silently route to the correct handler. **Never expose the
 routing infrastructure.** The user asks a question and gets an answer — they never
 see skill names, layer numbers, or routing decisions.
+
+---
+
+## 0. FAST PATH — Direct Generator Routing
+
+**Rule**: If the request is unambiguous AND maps to exactly one generator, route
+directly to `cc-factory` instead of going through `smart-scaffold` →
+`extension-concierge`. This saves tokens on simple requests.
+
+**Fast-path triggers** (invoke `cc-factory` immediately with the indicated mode):
+
+| Pattern | Route |
+|---------|-------|
+| "create a hook that..." / "make a pre-commit hook" / "write a hook for..." | `cc-factory` (hook mode) |
+| "make me a skill for..." / "create a skill that..." / "build a skill to..." | `cc-factory` (skill mode) |
+| "generate a settings file" / "configure settings" / "set up settings for..." | `cc-factory` (settings mode) |
+| "create an output style" / "make an output style" | `cc-factory` (output-style mode) |
+
+**KEEP FULL PATH** (fall through to the routing table below) for:
+- Ambiguous requests ("I want Claude to...", "help me set up...")
+- Multi-extension combos ("I need a hook AND a skill")
+- Audit / fix / explain intents
+- Package / plugin requests
+- Anything requiring orchestrator decision-making
+
+When a fast-path match is found, invoke the `cc-factory` skill directly. Pass the
+user's full message plus the mode directive (e.g., "HOOK MODE" or "SKILL MODE").
+Do not announce the routing.
 
 ---
 

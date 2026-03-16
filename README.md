@@ -134,10 +134,10 @@ No configuration needed. Just ask for what you want — routing is automatic.
 Extension Factory                        Dev Team Factory
 ════════════════                         ════════════════
 
-Layer 0: extension-guide                 (dev-team-guide — future)
+Layer 0: extension-guide                 dev-team-guide
          (invisible router)              (invisible router)
               |                                |
-Layer 1: intent-engine                   (dev-team-concierge — future)
+Layer 1: intent-engine                   dev-team-concierge
          smart-scaffold                  (orchestrator)
          extension-concierge                   |
               |                                |
@@ -165,6 +165,13 @@ Layer 2: Generator Skills                Generator Skills
 ## Components
 
 ### Dev Team Factory
+
+#### Routing & Orchestration (Layer 0-1)
+
+| Skill | Type | Description |
+|-------|------|-------------|
+| **dev-team-guide** | Router | Invisible intent router for dev team requests — routes to dev-team-concierge |
+| **dev-team-concierge** | Orchestrator | Resolves agent specifications, dispatches to agent-factory and team-configurator |
 
 #### Generator Skills
 
@@ -256,6 +263,9 @@ Layer 2: Generator Skills                Generator Skills
 | **plugin-builder** | Sonnet | Creates complete plugins with multiple component types |
 | **extension-validator** | Haiku | Two-mode validation: spec compliance + schema quality |
 | **doc-sync-checker** | Haiku | Detects documentation drift in reference skills |
+| **recommendation-engine** | Sonnet | Analyzes installed extensions and recommends additions |
+| **system-architect** | Sonnet | Designs complex multi-component extension systems (Tier 3) |
+| **subagent-generator** | Sonnet | Generates complex subagent configurations with multi-agent patterns |
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: sync-docs
+name: doc-sync
 description: |
   Checks cc-ref-* reference skills against live Anthropic documentation at
   code.claude.com and reports what's stale. Use when you want to verify

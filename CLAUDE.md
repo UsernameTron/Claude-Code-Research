@@ -342,8 +342,8 @@ If a task requires modifying any of these, stop and ask.
 ### Architecture
 - This is a **distributable Claude Code plugin** — not an application. No app code, no build step, no runtime.
 - The project root is the plugin root. `.claude-plugin/plugin.json` is the manifest.
-- `skills/` contains all 18 skills (6 reference, 7 generators, 2 validators, 1 unified factory, 1 router, 1 orchestrator).
-- `agents/` contains all 3 specialist subagents.
+- `skills/` contains 35 skills across both factories (8 reference, 7 generators, 5 routing/intelligence, 3 lifecycle/library, 6 lifecycle tools, 3 dev team library/generator, 3 other). `downloads/` contains 4 additional community skills.
+- `agents/` contains 10 specialist subagents (4 Extension Factory, 3 Dev Team Factory, 3 shared/additional).
 - `desktop-skills/` holds optional condensed skills for Claude Desktop (not part of the plugin).
 - Source docs at `~/Desktop/Claude Code Research/` and `~/projects/claude-code/` are **READ-ONLY reference** for development only. Skills are portable and do not depend on local paths.
 - Build plan lives at `~/Desktop/Claude Code Research/MASTER_BUILD_PLAN.md`.

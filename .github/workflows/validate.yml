@@ -1,0 +1,18 @@
+name: Validate Plugin
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install tools
+        run: cd tools && npm ci
+      - name: Validate frontmatter and structure
+        run: cd tools && npx tsx validate.ts
+      - name: Audit content completeness
+        run: cd tools && npx tsx audit-content.ts
+      - name: Test routing integrity
+        run: cd tools && npx tsx test-routing.ts

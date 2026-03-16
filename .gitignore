@@ -14,5 +14,8 @@ scout-agentskill.py
 agentskill-scout-report.md
 downloads/
 
+# Tool dependencies
+tools/node_modules/
+
 # macOS
 .DS_Store
