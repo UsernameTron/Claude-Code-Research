@@ -88,8 +88,35 @@ Execute these 5 steps for every combo:
 - Identify shared resources (files, env vars, conventions)
 - Determine install order (dependencies first)
 
-### Step 4: Generate All Pieces
-For each component, invoke the appropriate generator:
+### Step 3.5: Parallelization Analysis
+
+For each pair of components in the combo, determine if they can be generated in parallel:
+
+**Parallel-safe** (both conditions must be true):
+- Component B does NOT read from Component A's output file
+- Component B does NOT reference Component A's name or file path in its configuration
+
+**Sequential-required** (any condition triggers sequential):
+- Component B reads from Component A (e.g., a hook references a skill's name)
+- Component B's configuration includes a file path to Component A
+- Component B is a permission rule that Component A's hook event depends on
+
+Group components into generation phases:
+- **Phase 1**: All components with zero dependencies (generate in parallel)
+- **Phase 2**: Components that depend only on Phase 1 outputs (parallel within phase)
+- **Phase N**: Continue until all components assigned
+
+Present the phase grouping as part of the combo blueprint.
+
+### Step 4: Generate All Pieces (by phase)
+For each generation phase:
+1. Dispatch ALL components in this phase to their generators.
+2. Within a phase, components are independent — dispatch as separate operations that can run concurrently.
+3. Wait for all generators in the phase to complete before starting the next phase.
+4. Pass wiring context to each generator. Include:
+   - What other components exist in this combo
+   - What this component reads from or writes to
+   - Cross-references to other component files/paths
 
 | Component Type | Generator |
 |----------------|-----------|
@@ -101,10 +128,8 @@ For each component, invoke the appropriate generator:
 | MCP config | `mcp-configurator` |
 | Settings | `settings-architect` |
 
-**Critical**: Pass wiring context to each generator. Include:
-- What other components exist in this combo
-- What this component reads from or writes to
-- Cross-references to other component files/paths
+After ALL phases complete:
+5. Run `extension-validator` subagent on ALL generated files together (not per-component). This catches cross-component reference issues.
 
 ### Step 5: Present Blueprint
 - Use the blueprint template (`blueprint-template.md`)
