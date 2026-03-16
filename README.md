@@ -90,17 +90,41 @@ A Claude Code plugin that generates extensions **and** application development a
 
 ## Installation
 
+### Quick Install (Recommended)
+
 ```bash
-# As a plugin (recommended)
+# Install as a Claude Code plugin — this gives you BOTH factories
 claude plugin add /path/to/claude-code-factory
-
-# Test locally
-claude --plugin-dir /path/to/claude-code-factory
-
-# Or copy individual components
-cp -r skills/* ~/.claude/skills/
-cp -r agents/* ~/.claude/agents/
 ```
+
+### Alternative: Test Locally
+
+```bash
+# Point Claude Code at the plugin directory for testing
+claude --plugin-dir /path/to/claude-code-factory
+```
+
+### Alternative: Copy Individual Components
+
+```bash
+# Copy only the skills and agents you want
+cp -r skills/hook-factory ~/.claude/skills/       # Just the hook generator
+cp -r skills/dev-recipes ~/.claude/skills/         # Just the dev recipes
+cp -r agents/team-architect.md ~/.claude/agents/   # Just one agent
+```
+
+### What You Get
+
+One install gives you **both** factories:
+
+| Factory | What It Does | Try It |
+|---------|-------------|--------|
+| **Extension Factory** | Generates Claude Code extensions (skills, hooks, plugins, MCP, settings, CI/CD) | `"I need a hook that blocks writes to .env files"` |
+| **Dev Team Factory** | Generates development agents and teams across 10 domains | `"Set up a dev team for my React + Django project"` |
+
+No configuration needed. Just ask for what you want — routing is automatic.
+
+> **New to Claude Code plugins?** See the [Getting Started Guide](docs/getting-started.md) for a complete walkthrough.
 
 ---
 
