@@ -327,3 +327,20 @@ Before presenting the final output, verify:
 - [ ] JSON structure matches the 3-level nesting: event → matcher group → handler
 - [ ] Script files use `"$CLAUDE_PROJECT_DIR"` path prefix
 - [ ] Script files are marked executable
+
+---
+
+## Post-Generation Install Offer
+
+After presenting the generated hook configuration to the user, offer installation:
+
+> "Want me to install this hook now?
+>   1. **All my projects** — available everywhere you use Claude
+>   2. **Just this project, for the team** — teammates get it too
+>   3. **Just this project, just me** — personal, won't affect others
+>   (or 'no' to just keep the generated config)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: `hook`
+- The generated hook JSON and any script files
+- The selected scope (1 = user, 2 = project-shared, 3 = project-local)

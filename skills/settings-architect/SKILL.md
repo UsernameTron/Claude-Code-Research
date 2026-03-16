@@ -165,3 +165,20 @@ Provide:
 - [ ] Model strings use current model IDs
 - [ ] Sandbox config uses correct nesting structure
 - [ ] If merging: existing settings preserved, only additions made
+
+---
+
+## Post-Generation Install Offer
+
+After presenting the generated settings/permissions to the user, offer installation:
+
+> "Want me to apply these settings now?
+>   1. **All my projects** — applies everywhere you use Claude
+>   2. **Just this project, for the team** — teammates get it too
+>   3. **Just this project, just me** — personal, won't affect others
+>   (or 'no' to just keep the generated config)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: `settings` or `permissions` (as appropriate)
+- The generated configuration
+- The selected scope (1 = user, 2 = project-shared, 3 = project-local)

@@ -188,3 +188,19 @@ go-tools/
 └── skills/
     └── go-helper/SKILL.md
 ```
+
+---
+
+## Post-Generation Install Offer
+
+After presenting the generated plugin to the user, offer installation:
+
+> "Want me to set up this plugin now?
+>   - **Test locally**: I'll show you the `--plugin-dir` command
+>   - **Install permanently**: I'll add it to your enabled plugins
+>   (or 'no' to just keep the generated files)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: `plugin`
+- The plugin directory path
+- The selected installation method

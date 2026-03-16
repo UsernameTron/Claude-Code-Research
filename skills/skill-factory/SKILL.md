@@ -251,3 +251,20 @@ Before presenting final output, verify:
 - [ ] Directory structure follows `skill-name/SKILL.md` pattern
 - [ ] If `context: fork`, also set `agent` field appropriately
 - [ ] If `user-invocable: false`, no `argument-hint` (contradictory)
+
+---
+
+## Post-Generation Install Offer
+
+After presenting the generated skill to the user, offer installation:
+
+> "Want me to install this skill now?
+>   1. **All my projects** — available everywhere you use Claude
+>   2. **Just this project, for the team** — teammates get it too
+>   3. **Just this project, just me** — personal, won't affect others
+>   (or 'no' to just keep the generated files)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: `skill`
+- The generated SKILL.md content and any supporting files
+- The selected scope (1 = user, 2 = project-shared, 3 = project-local)

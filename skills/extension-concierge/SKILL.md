@@ -324,7 +324,26 @@ Acknowledge and offer choice:
 
 ---
 
-## 8. What This Skill Does NOT Do
+## 8. Post-Generation Install Offer
+
+After presenting any generated extension to the user, offer installation:
+
+> "Want me to install this now?
+>   1. **All my projects** — available everywhere you use Claude
+>   2. **Just this project, for the team** — teammates get it too
+>   3. **Just this project, just me** — personal, won't affect others
+>   (or 'no' to just keep the generated files)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: whatever was generated
+- The generated file content/paths
+- The selected scope (1 = user, 2 = project-shared, 3 = project-local)
+
+For multi-type outputs (complex path), offer installation for all pieces at once.
+
+---
+
+## 9. What This Skill Does NOT Do
 
 - **Diagnose broken configs** — that's `extension-auditor` (routed by extension-guide)
 - **Scan for upgrades** — that's `upgrade-scanner` (routed by extension-guide)

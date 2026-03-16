@@ -200,3 +200,19 @@ as an alternative to project-wide `.mcp.json` if the server is only needed by on
 - [ ] .mcp.json uses `${VAR}` syntax for environment variables
 - [ ] Scope matches user's sharing intent
 - [ ] Auth method is correct for the service
+
+---
+
+## Post-Generation Install Offer
+
+After presenting the generated MCP configuration to the user, offer installation:
+
+> "Want me to install this MCP server now?
+>   1. **All my projects** — available everywhere you use Claude
+>   2. **Just this project** — only for this repository
+>   (or 'no' to just keep the generated config)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: `mcp`
+- The generated MCP server configuration
+- The selected scope (1 = user, 2 = project)

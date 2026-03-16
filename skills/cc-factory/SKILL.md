@@ -259,3 +259,20 @@ If the user's request is too vague to resolve key decisions:
 - Fill in sensible defaults
 - Flag assumptions in Step 2 (Show Resolved Decisions)
 - Let the user override before you write files
+
+---
+
+## Post-Generation Install Offer
+
+After presenting the generated extension to the user, offer installation:
+
+> "Want me to install this now?
+>   1. **All my projects** — available everywhere you use Claude
+>   2. **Just this project, for the team** — teammates get it too
+>   3. **Just this project, just me** — personal, won't affect others
+>   (or 'no' to just keep the generated files)"
+
+If the user accepts, invoke the `extension-installer` skill with:
+- Extension type: the type that was generated (skill, hook, agent, etc.)
+- The generated file content/paths
+- The selected scope (1 = user, 2 = project-shared, 3 = project-local)
