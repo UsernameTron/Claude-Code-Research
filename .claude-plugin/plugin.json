@@ -1,7 +1,7 @@
 {
   "name": "claude-code-factory",
-  "version": "1.7.0",
-  "description": "Intent-first Claude Code extension autopilot with 40 pre-built recipes, jargon-free scaffolding, progressive disclosure, and one-shot installation. Describe what you want — the system starts simple, asks plain-English questions if needed, builds, installs, and verifies.",
+  "version": "1.8.0",
+  "description": "Intent-first Claude Code extension autopilot with 40 pre-built recipes, jargon-free scaffolding, progressive disclosure, one-shot installation, 12 coordinated combo patterns, and teaching annotations. Describe what you want — the system starts simple, asks plain-English questions if needed, builds coordinated systems, explains every piece, installs, and verifies.",
   "author": {
     "name": "Pete Connor"
   },
