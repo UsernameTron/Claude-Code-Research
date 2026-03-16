@@ -231,6 +231,68 @@ Generated [type] configuration:
   To test: [specific command or action]
 ```
 
+### 4A. Teaching Annotations (Post-Processing)
+
+After generating ANY output (simple or complex path), append teaching annotations.
+These annotations turn every generation into a learning moment. Reference
+`teaching-vocabulary.md` for plain-English definitions and customization pointers.
+
+**Tier-aware verbosity:**
+
+| Tier | Annotation Level |
+|------|-----------------|
+| **Tier 1** (single extension) | Full annotations — all 4 sections below |
+| **Tier 2** (combo, 2-4 pieces) | Per-component brief — 1-2 sentences each section |
+| **Tier 3** (system, 5+ pieces) | Architecture overview only — skip per-field explanations |
+
+**The 4 annotation sections:**
+
+**1. What it does** (always include)
+Derive from the generated config. Plain English, no field names.
+```
+> **What it does**: Every time you edit a file, Claude automatically runs
+> Prettier to clean up the formatting. If Prettier finds issues, Claude
+> sees the output and knows what changed.
+```
+
+**2. Why it's structured this way** (Tier 1 and 2 only)
+Introduce concepts in context. Reference `teaching-vocabulary.md` for definitions.
+Only explain concepts that appear in this specific generation.
+```
+> **Why it's structured this way**: This is a "hook" — a rule that fires
+> automatically on an event. The `PostToolUse` event means "after Claude
+> uses a tool." The `Write|Edit` matcher means "but only when the tool
+> was Write or Edit." So: after any file change → run formatter.
+```
+
+**3. What you'd change** (Tier 1 and 2 only)
+Point to specific lines/fields with concrete modification examples.
+Reference the customization pointers in `teaching-vocabulary.md`.
+```
+> **What you'd change**:
+> - Add more file types: change `prettier` to `prettier --check` for dry-run
+> - Different formatter: replace `prettier --write` with `black` (Python)
+>   or `gofmt` (Go) in the command
+> - Make it non-blocking: the hook currently waits for Prettier to finish;
+>   add `"async": true` if you want Claude to keep working while it formats
+```
+
+**4. What's next** (always include)
+Suggest related capabilities or upgrade paths. Keep to 1-2 suggestions.
+```
+> **What's next**:
+> - Add a linter that runs after formatting (this becomes a combo —
+>   I can set that up if you want)
+> - Block commits if formatting fails (upgrade to a PreToolUse gate)
+```
+
+**Rules for annotations:**
+- Never repeat information already in the main output
+- Use "you" language, not "the user"
+- Explain concepts the FIRST time they appear; don't re-explain in subsequent generations
+- Skip annotations entirely if the user says "skip the explanation" or shows expert signals (uses field names, references schemas)
+- Keep total annotation length under 15 lines for Tier 1, 8 lines per component for Tier 2
+
 ---
 
 ## 5. Review Loop Protocol
