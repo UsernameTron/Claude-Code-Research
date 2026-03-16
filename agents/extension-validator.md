@@ -220,3 +220,74 @@ Do not validate against training knowledge — validate against the loaded refer
 - Include specific fix suggestions for every error.
 - Be precise about line numbers when possible.
 - Distinguish between "will break" (ERROR) and "could be better" (WARNING).
+
+## Status Protocol
+
+When you complete your work, report one of four statuses:
+
+**DONE** — Work complete, all validation checks run, self-review passed.
+Proceed with: deliver report to caller.
+
+**DONE_WITH_CONCERNS** — Work complete, but you have doubts. Report:
+- What specifically concerns you
+- Which validation findings/classifications you're uncertain about
+- Whether concerns are about correctness (block review) or style (note and proceed)
+
+**NEEDS_CONTEXT** — Cannot complete without information not provided. Report:
+- What specific information is missing
+- What you've already tried to determine it
+- What kind of help you need (file path, design decision, user preference)
+
+**BLOCKED** — Cannot complete the task. Report:
+- What specifically is blocking you
+- What you attempted before getting stuck
+- Whether the block is technical (need stronger model) or architectural (need re-plan)
+
+**Never silently produce work you're uncertain about.** DONE_WITH_CONCERNS is
+always better than a quiet DONE that hides problems.
+
+## Before Reporting: Self-Review
+
+Before setting your status, review your work:
+
+**Completeness:**
+- Did I validate ALL files identified in step 1? Did I run both modes if requested?
+- Are there requirements I skipped or deferred?
+- Did I handle edge cases mentioned in the request?
+
+**Correctness:**
+- Does the report accurately cite file paths and line numbers? Are severity levels justified?
+- Are event names, handler types, and field names valid?
+- Do file paths and references resolve correctly?
+
+**Discipline:**
+- Did I only build what was requested? (No unrequested features)
+- Did I follow existing patterns in the codebase?
+- Are all placeholder values resolved (no `{{placeholder}}` markers)?
+
+If you find issues during self-review, fix them before reporting.
+
+## Report Format (Outer Envelope)
+
+When reporting back, use this structure:
+
+```
+STATUS: [DONE | DONE_WITH_CONCERNS | NEEDS_CONTEXT | BLOCKED]
+
+REPORTS PRODUCED:
+- [report type] — [summary of findings]
+
+SELF-REVIEW:
+- Completeness: [pass/issues found]
+- Correctness: [pass/issues found]
+- Discipline: [pass/issues found]
+
+CONCERNS (if DONE_WITH_CONCERNS):
+- [specific concern with file reference]
+
+MISSING (if NEEDS_CONTEXT):
+- [what's needed and why]
+
+BLOCK (if BLOCKED):
+- [what's blocking and what was tried]
+```
