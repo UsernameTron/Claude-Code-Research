@@ -420,6 +420,27 @@ Options:
 - Show the current output as-is with all validator findings
 - Let the user decide whether to edit manually or rephrase the request
 
+### 5G. Multi-Component Validation
+
+When validating combo or Tier 3 output with 2+ components:
+
+1. **Parallel spec compliance**: Run spec compliance on ALL components simultaneously.
+   Each validator instance checks ONE component against its slice of the original
+   request. Dispatch as separate Agent calls.
+2. **Collect verdicts**: Wait for all spec compliance verdicts. If ANY fail, fix only
+   the failed components (re-dispatch their generators), then re-validate only the
+   failures.
+3. **After all spec passes**: Run schema quality on ALL components simultaneously
+   (same parallel dispatch pattern).
+4. **Collect quality verdicts**: Fix failures only, re-validate only failures.
+
+This replaces sequential per-component validation with parallel batches per stage.
+The Stage 1 → Stage 2 ordering is preserved (all spec must pass before any schema
+quality runs), but within each stage, components validate concurrently.
+
+Circuit breaker rules (Section 5F) apply per-component: if a single component fails
+3 times, trigger the circuit breaker for that component while others proceed.
+
 ---
 
 ## 6. Error Handling
