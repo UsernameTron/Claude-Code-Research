@@ -10,7 +10,7 @@ description: |
   "integrate with", "MCP server", "connect database", "add GitHub/Slack/Notion".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
-skills: cc-ref-settings
+skills: cc-ref-settings, cc-ref-mcp
 ---
 
 # MCP Configurator — Claude Code MCP Server Generator
@@ -25,8 +25,8 @@ with proper transport, authentication, and scope.
 
 1. **IDENTIFY** — Determine the service and transport type.
    Announce: "I'll configure a **[transport]** MCP connection to **[service]**."
-2. **LOAD** — Read the official Claude Code documentation for MCP servers,
-   or use the `cc-ref-mcp` reference skill (not yet created) if loaded in your context.
+2. **LOAD** — Read the `cc-ref-mcp` reference skill if loaded in your context,
+   or read the official Claude Code documentation for MCP servers.
 3. **RESOLVE** — Make all technical decisions using the Resolution Engine below.
    Present resolved decisions to the user before writing.
 4. **OUTPUT** — Provide the CLI command or .mcp.json config, plus auth and

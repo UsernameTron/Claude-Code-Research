@@ -13,7 +13,7 @@
   - [x] Section 4: Output protocol (file paths, testing steps)
   - [x] Reference loading: cc-ref-skills
 - [x] Deploy to `~/.claude/skills/skill-factory/SKILL.md`
-- [ ] Test: "create a skill that validates JSON schemas"
+- [x] Test: "create a skill that validates JSON schemas"
 
 ### 2.2 — Hook Factory (`hook-factory`)
 - [x] Write `skills-source/hook-factory/SKILL.md`
@@ -25,7 +25,7 @@
   - [x] Section 5: Output protocol (JSON config, script files, merge behavior, test steps)
   - [x] Reference loading: cc-ref-hooks
 - [x] Deploy to `~/.claude/skills/hook-factory/SKILL.md`
-- [ ] Test: "create a hook that blocks rm -rf commands"
+- [x] Test: "create a hook that blocks rm -rf commands"
 
 ### 2.3 — Plugin Packager (`plugin-packager`)
 - [x] Write `skills-source/plugin-packager/SKILL.md`
@@ -36,7 +36,7 @@
   - [x] Section 4: Component migration (existing skills/agents/hooks → plugin)
   - [x] Reference loading: plugins-reference.md (authoritative source)
 - [x] Deploy to `~/.claude/skills/plugin-packager/SKILL.md`
-- [ ] Test: "package my code-reviewer agent into a plugin"
+- [x] Test: "package my code-reviewer agent into a plugin"
 
 ### 2.4 — MCP Configurator (`mcp-configurator`)
 - [x] Write `skills-source/mcp-configurator/SKILL.md`
@@ -47,7 +47,7 @@
   - [x] Section 4: Output protocol (.mcp.json or CLI commands)
   - [x] Reference loading: mcp.md (authoritative source)
 - [x] Deploy to `~/.claude/skills/mcp-configurator/SKILL.md`
-- [ ] Test: "connect to a PostgreSQL database via MCP"
+- [x] Test: "connect to a PostgreSQL database via MCP"
 
 ### 2.5 — Settings Architect (`settings-architect`)
 - [x] Write `skills-source/settings-architect/SKILL.md`
@@ -58,7 +58,7 @@
   - [x] Section 4: Sandbox, model, env configuration
   - [x] Reference loading: cc-ref-settings
 - [x] Deploy to `~/.claude/skills/settings-architect/SKILL.md`
-- [ ] Test: "create settings that lock to Sonnet and block curl"
+- [x] Test: "create settings that lock to Sonnet and block curl"
 
 ### 2.6 — CI/CD Pipeline Generator (`cicd-generator`)
 - [x] Write `skills-source/cicd-generator/SKILL.md`
@@ -69,7 +69,7 @@
   - [x] Section 4: Output protocol (workflow YAML, secrets, test steps)
   - [x] Reference loading: github-actions.md, gitlab-ci-cd.md, headless.md
 - [x] Deploy to `~/.claude/skills/cicd-generator/SKILL.md`
-- [ ] Test: "create a GitHub Action that reviews PRs with Claude"
+- [x] Test: "create a GitHub Action that reviews PRs with Claude"
 
 ### 2.7 — Output Style Creator (`output-style-creator`)
 - [x] Write `skills-source/output-style-creator/SKILL.md`
@@ -80,14 +80,14 @@
   - [x] Section 4: Output protocol (style file with frontmatter)
   - [x] Reference loading: output-styles.md
 - [x] Deploy to `~/.claude/skills/output-style-creator/SKILL.md`
-- [ ] Test: "create an output style for executive briefings"
+- [x] Test: "create an output style for executive briefings"
 
 ## Verification
 - [x] All 7 skills have valid YAML frontmatter
 - [x] All skills under 500 lines (max: 304, min: 163)
 - [x] Each skill references its authoritative doc source correctly
 - [x] No TODO/FIXME left behind
-- [ ] Each skill tested with at least one generation request
+- [x] Each skill tested with at least one generation request
 - [x] Diff reviewed: all 7 source/deploy pairs identical
 
 ## Results
@@ -113,3 +113,14 @@
 All 7 Phase 2 generators are written and deployed. Remaining work:
 - Behavioral testing of each skill in a new session
 - Commit to `feat/phase-2-generators` branch
+
+## Deferred Testing Completed
+
+**Date**: 2026-03-16
+
+Reference skills built and wired:
+- `cc-ref-mcp` → `mcp-configurator` (skills: cc-ref-settings, cc-ref-mcp)
+- `cc-ref-cicd` → `cicd-generator` (skills: cc-ref-cicd)
+- `cc-ref-output-styles` → `output-style-creator` (skills: cc-ref-output-styles)
+
+All seven generators validated with planned test prompts. Results documented in behavioral testing during execution.
