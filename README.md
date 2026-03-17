@@ -158,6 +158,9 @@ Layer 2: Generator Skills                Generator Skills
          cc-ref-plugins                  agent-quality-reviewer
          cc-ref-subagents                stack-analyzer
          cc-ref-multi-agent
+         cc-ref-mcp
+         cc-ref-cicd
+         cc-ref-output-styles
 ```
 
 ---
@@ -254,6 +257,9 @@ Layer 2: Generator Skills                Generator Skills
 | **cc-ref-plugins** | Plugin manifest schema, directory structure, namespacing |
 | **cc-ref-subagents** | Agent frontmatter, built-in agents, tool control, teams |
 | **cc-ref-multi-agent** | Multi-agent orchestration patterns, token economics |
+| **cc-ref-mcp** | MCP transport types, scopes, .mcp.json schema, auth patterns |
+| **cc-ref-cicd** | GitHub Actions inputs, GitLab CI config, headless CLI flags |
+| **cc-ref-output-styles** | Output style frontmatter, scope directories, style vs alternatives |
 
 #### Specialist Agents
 
