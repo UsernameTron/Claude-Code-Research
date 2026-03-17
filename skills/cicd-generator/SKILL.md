@@ -10,6 +10,7 @@ description: |
   "set up CI/CD with Claude", "deploy with Claude".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
+skills: cc-ref-cicd
 ---
 
 # CI/CD Generator — Claude Code Pipeline Generator
@@ -23,9 +24,9 @@ GitHub Actions or GitLab CI/CD workflows.
 
 1. **IDENTIFY** — Determine platform (GitHub/GitLab) and use case.
    Announce: "I'll create a **[platform]** workflow for **[use case]**."
-2. **LOAD** — Read the official Claude Code documentation for the relevant
-   platform, or use the `cc-ref-cicd` reference skill (not yet created) if loaded in your
-   context. Key topics: GitHub Actions integration, GitLab CI/CD setup,
+2. **LOAD** — Read the `cc-ref-cicd` reference skill if loaded in your context,
+   or read the official Claude Code documentation for the relevant platform.
+   Key topics: GitHub Actions integration, GitLab CI/CD setup,
    and headless/non-interactive CLI usage.
 3. **RESOLVE** — Make all decisions using the Resolution Engine.
    Present the workflow to the user before writing.

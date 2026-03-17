@@ -10,6 +10,7 @@ description: |
   style", "format responses as".
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
+skills: cc-ref-output-styles
 ---
 
 # Output Style Creator — Claude Code Output Style Generator
@@ -25,8 +26,8 @@ style file that modifies the system prompt.
 1. **ANALYZE** — Extract tone, format, audience, and constraints from the
    request. Announce: "I'll create an output style named **[name]** for
    **[audience/purpose]**."
-2. **LOAD** — Read the official Claude Code documentation for output styles,
-   or use the `cc-ref-output-styles` reference skill (not yet created) if loaded in your context.
+2. **LOAD** — Read the `cc-ref-output-styles` reference skill if loaded in your context,
+   or read the official Claude Code documentation for output styles.
 3. **RESOLVE** — Make all decisions using the Resolution Engine.
    Present the style definition to the user before writing.
 4. **OUTPUT** — Write the style file. Provide activation instructions.
