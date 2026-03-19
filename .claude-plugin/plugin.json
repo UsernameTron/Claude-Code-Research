@@ -1,33 +1,6 @@
 {
   "name": "claude-code-factory",
-  "version": "2.4.0",
-  "description": "Two factories in one plugin: (1) Extension Factory — generates skills, hooks, plugins, MCP configs, settings, CI/CD pipelines from natural language with 40 recipes and 12 combo patterns. (2) Dev Team Factory — generates 72 application development agent archetypes across 10 domains (web, mobile, data/ML, systems, cloud, DevOps) with 86 recipes and 14 team patterns. Includes intent-driven routing, automatic tech stack detection, and two-stage validation.",
-  "author": {
-    "name": "Pete Connor"
-  },
-  "repository": "https://github.com/UsernameTron/Claude-Code-Research",
-  "license": "MIT",
-  "keywords": [
-    "claude-code",
-    "extensions",
-    "generator",
-    "skills",
-    "hooks",
-    "plugins",
-    "subagents",
-    "mcp",
-    "settings",
-    "ci-cd",
-    "multi-agent",
-    "dev-team",
-    "agent-factory",
-    "code-review",
-    "mobile",
-    "data-science",
-    "ml-ops",
-    "systems",
-    "cloud",
-    "devops",
-    "framework-specialist"
-  ]
+  "description": "Extension Factory + Dev Team Factory — generates extensions and dev agents from natural language",
+  "version": "1.0.0",
+  "author": { "name": "Pete Connor" }
 }
