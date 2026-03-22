@@ -347,6 +347,7 @@ If a task requires modifying any of these, stop and ask.
 - `desktop-skills/` holds optional condensed skills for Claude Desktop (not part of the plugin).
 - Source docs at `~/Desktop/Claude Code Research/` and `~/projects/claude-code/` are **READ-ONLY reference** for development only. Skills are portable and do not depend on local paths.
 - Build plan lives at `~/Desktop/Claude Code Research/MASTER_BUILD_PLAN.md`.
+- `local-marketplace/` is gitignored — local-only plugin marketplace config, not part of the plugin.
 
 ### Conventions
 - File naming: kebab-case for all files.
@@ -362,6 +363,11 @@ If a task requires modifying any of these, stop and ask.
 - All skills are portable — no local file paths. They reference official Claude Code documentation generically.
 - To test locally: `claude --plugin-dir .`
 - For personal use without the plugin system, copy individual skills to `~/.claude/skills/` or agents to `~/.claude/agents/`.
+
+### Documentation
+- `docs/DEVOPS-HANDOFF.md` — environment requirements, project structure, security notes, deployment maturity.
+- `docs/getting-started.md` — user-facing guide.
+- Keep both in sync with architecture changes.
 
 ### Testing
 - No automated test framework. Verification is behavioral.

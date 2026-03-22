@@ -17,5 +17,8 @@ downloads/
 # Tool dependencies
 tools/node_modules/
 
+# Local marketplace config
+local-marketplace/
+
 # macOS
 .DS_Store

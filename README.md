@@ -306,6 +306,13 @@ Layer 2: Generator Skills                Generator Skills
 
 ---
 
+## Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [Getting Started Guide](docs/getting-started.md) | Complete walkthrough for new users |
+| [DevOps Handoff](docs/DEVOPS-HANDOFF.md) | Environment requirements, project structure, deployment maturity |
+
 ## License
 
 MIT
